@@ -1,18 +1,11 @@
 import React, { useRef } from 'react';
 import { DEVELOPER_PROFILE } from '../../data/portfolioData';
-import { sound } from '../../utils/sound';
 import {
   Mail,
   Phone,
   Linkedin,
   Github
 } from 'lucide-react';
-
-interface ResumeAppProps {
-  onClose?: () => void;
-  onMinimize?: () => void;
-  onMaximize?: () => void;
-}
 
 export const ResumeApp: React.FC = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -61,7 +54,7 @@ export const ResumeApp: React.FC = () => {
                 className="flex items-center gap-1 hover:text-blue-600 transition-colors"
               >
                 <Linkedin className="w-3 h-3 text-[#1a2e5a]" />
-                <span>linkedin.com/in/satyabratapradhan</span>
+                <span>satyabratapradhan</span>
               </a>
               <span className="text-slate-400">•</span>
               <a
@@ -71,7 +64,7 @@ export const ResumeApp: React.FC = () => {
                 className="flex items-center gap-1 hover:text-blue-600 transition-colors"
               >
                 <Github className="w-3 h-3 text-[#1a2e5a]" />
-                <span>github.com/satyabratapradhan01</span>
+                <span>satyabratapradhan01</span>
               </a>
             </div>
           </div>
@@ -145,20 +138,19 @@ export const ResumeApp: React.FC = () => {
                 </ul>
               </div>
 
-              {/* AI-Powered Job Application Tracker */}
+              {/* Job Application Tracker */}
               <div>
                 <div className="flex justify-between items-baseline">
-                  <span className="font-bold text-slate-900 text-[11.5px]">AI-Powered Job Application Tracker</span>
-                  <span className="text-[10px] text-slate-600 font-medium">2026</span>
+                  <span className="font-bold text-slate-900 text-[11.5px]">Job Application Tracker</span>
+                  <span className="text-[10px] text-slate-600 font-medium">Nov 2025 – Feb 2026</span>
                 </div>
                 <div className="italic text-slate-600 text-[10px] mb-1">
-                  React.js, Node.js, Express.js, MongoDB, JWT, Claude API
+                  React.js, Node.js, Express.js, MongoDB, JWT
                 </div>
                 <ul className="list-disc list-outside ml-4 space-y-0.5 text-slate-800 text-[10.5px] leading-snug">
                   <li>Built a full-stack job application tracking platform that helps users organize, monitor, and manage their job search pipeline end-to-end.</li>
                   <li>Designed MongoDB schemas to model applications, companies, and status stages, and architected a RESTful API layer using Node.js and Express.js for CRUD operations across applications, notes, and status tracking.</li>
                   <li>Implemented secure JWT-based authentication and authorization to manage user sessions and protect personal application data.</li>
-                  <li>Integrated the Claude API to power AI-assisted features such as application insights, follow-up suggestions, and resume/job-description matching.</li>
                   <li>Developed a responsive React.js frontend with a structured component hierarchy for dashboards, application lists, and detail views, deployed on a free-tier stack — Vercel, Render, and MongoDB Atlas.</li>
                 </ul>
               </div>
@@ -209,7 +201,7 @@ export const ResumeApp: React.FC = () => {
               <div><span className="font-bold">Frontend:</span> React.js, Next.js, HTML, CSS, Tailwind CSS</div>
               <div><span className="font-bold">Backend:</span> Node.js, Express.js, REST APIs</div>
               <div><span className="font-bold">Databases:</span> MongoDB, MySQL</div>
-              <div><span className="font-bold">DevOps & Tools:</span> Docker, Kubernetes, Git, GitHub, CI/CD, AWS, Terraform</div>
+              <div><span className="font-bold">DevOps & Tools:</span> Docker, Kubernetes, Git, GitHub, CI/CD, AWS</div>
               <div><span className="font-bold">Other:</span> WebRTC, WebSockets, Redux Toolkit</div>
               <div><span className="font-bold">Deployment:</span> Vercel, Render</div>
             </div>
@@ -219,4 +211,3 @@ export const ResumeApp: React.FC = () => {
     </div>
   );
 };
-

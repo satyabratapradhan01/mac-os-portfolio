@@ -374,7 +374,7 @@ export const TerminalApp: React.FC<TerminalAppProps> = ({ onOpenApp }) => {
 
       case 'open':
         const target = args[0]?.toLowerCase();
-        if (['finder', 'safari', 'vscode', 'photos', 'notes', 'resume', 'music', 'calculator', 'messages', 'settings'].includes(target)) {
+        if (['finder', 'safari', 'vscode', 'photos', 'notes', 'resume', 'music', 'calculator', 'messages'].includes(target)) {
           onOpenApp(target as AppId);
           output = <div className="text-xs text-blue-300">Launching {target}.app...</div>;
         } else {

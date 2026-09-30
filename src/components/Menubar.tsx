@@ -5,14 +5,11 @@ import {
   Wifi,
   Battery,
   BatteryCharging,
-  Search,
   Sliders,
   Sparkles,
   Volume2,
-  Calendar as CalendarIcon,
   Moon,
   Sun,
-  ShieldCheck,
   RotateCw,
   Power,
   Lock,
@@ -24,7 +21,6 @@ interface MenubarProps {
   onOpenApp: (id: AppId) => void;
   onToggleControlCenter: () => void;
   isControlCenterOpen: boolean;
-  onToggleSpotlight: () => void;
   onLockScreen: () => void;
   onOpenAboutMac: () => void;
   soundEnabled: boolean;
@@ -43,7 +39,6 @@ const APP_NAMES: Record<AppId, string> = {
   resume: 'Preview',
   music: 'Music',
   calculator: 'Calculator',
-  settings: 'System Settings',
   messages: 'Messages',
   trash: 'Trash',
   aboutMac: 'About This Mac',
@@ -54,7 +49,6 @@ export const Menubar: React.FC<MenubarProps> = ({
   onOpenApp,
   onToggleControlCenter,
   isControlCenterOpen,
-  onToggleSpotlight,
   onLockScreen,
   onOpenAboutMac,
   soundEnabled,
@@ -65,9 +59,7 @@ export const Menubar: React.FC<MenubarProps> = ({
   const [timeString, setTimeString] = useState('');
   const [dateString, setDateString] = useState('');
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [showCalendarFlyout, setShowCalendarFlyout] = useState(false);
   const [showBatteryFlyout, setShowBatteryFlyout] = useState(false);
-  const [showWifiFlyout, setShowWifiFlyout] = useState(false);
 
   const menubarRef = useRef<HTMLDivElement>(null);
 
@@ -98,9 +90,7 @@ export const Menubar: React.FC<MenubarProps> = ({
     const handleClickOutside = (e: MouseEvent) => {
       if (menubarRef.current && !menubarRef.current.contains(e.target as Node)) {
         setActiveMenu(null);
-        setShowCalendarFlyout(false);
         setShowBatteryFlyout(false);
-        setShowWifiFlyout(false);
       }
     };
     window.addEventListener('mousedown', handleClickOutside);
@@ -113,9 +103,7 @@ export const Menubar: React.FC<MenubarProps> = ({
       setActiveMenu(null);
     } else {
       setActiveMenu(menuName);
-      setShowCalendarFlyout(false);
       setShowBatteryFlyout(false);
-      setShowWifiFlyout(false);
     }
   };
 
@@ -158,15 +146,6 @@ export const Menubar: React.FC<MenubarProps> = ({
                 <span>About This Mac</span>
               </button>
               <div className="h-px bg-white/10 my-1"></div>
-              <button
-                onClick={() => {
-                  setActiveMenu(null);
-                  onOpenApp('settings');
-                }}
-                className="w-full px-3 py-1 text-left hover:bg-blue-600 hover:text-white flex items-center justify-between"
-              >
-                <span>System Settings...</span>
-              </button>
               <button
                 onClick={() => {
                   setActiveMenu(null);
@@ -370,8 +349,6 @@ export const Menubar: React.FC<MenubarProps> = ({
             onClick={() => {
               sound.playClick();
               setShowBatteryFlyout(!showBatteryFlyout);
-              setShowWifiFlyout(false);
-              setShowCalendarFlyout(false);
               setActiveMenu(null);
             }}
             className="flex items-center gap-1 px-1 py-0.5 rounded hover:bg-white/20 transition-colors"
@@ -405,56 +382,21 @@ export const Menubar: React.FC<MenubarProps> = ({
           )}
         </div>
 
-        {/* Wi-Fi with Flyout */}
+        {/* Wi-Fi Icon */}
         <div className="relative">
           <button
             id="wifi-btn"
             onClick={() => {
               sound.playClick();
-              setShowWifiFlyout(!showWifiFlyout);
               setShowBatteryFlyout(false);
-              setShowCalendarFlyout(false);
               setActiveMenu(null);
             }}
             className="p-1 rounded hover:bg-white/20 transition-colors"
-            title="Wi-Fi: Connected to DevFiber-5G"
+            title="Wi-Fi: Connected"
           >
             <Wifi className="w-3.5 h-3.5 text-white" />
           </button>
-
-          {showWifiFlyout && (
-            <div className="absolute top-7 right-0 w-56 bg-slate-900/95 backdrop-blur-2xl border border-white/15 rounded-lg shadow-2xl p-3 z-50 text-white animate-in fade-in zoom-in-95 duration-100">
-              <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-2">
-                <span className="font-semibold text-xs">Wi-Fi Network</span>
-                <span className="text-emerald-400 text-[11px]">On</span>
-              </div>
-              <div className="text-[11px] space-y-1.5">
-                <div className="flex items-center justify-between text-white bg-white/10 px-2 py-1 rounded">
-                  <span className="flex items-center gap-1.5">
-                    <Wifi className="w-3 h-3 text-emerald-400" /> DevFiber-Ultra-5G
-                  </span>
-                  <ShieldCheck className="w-3 h-3 text-emerald-400" />
-                </div>
-                <div className="text-[10px] text-slate-400 px-1">
-                  Speed: 1,200 Mbps / Latency: 4ms
-                </div>
-              </div>
-            </div>
-          )}
         </div>
-
-        {/* Spotlight Search Button */}
-        <button
-          id="spotlight-btn"
-          onClick={() => {
-            sound.playClick();
-            onToggleSpotlight();
-          }}
-          className="p-1 rounded hover:bg-white/20 transition-colors"
-          title="Spotlight Search (⌘Space)"
-        >
-          <Search className="w-3.5 h-3.5 text-white" />
-        </button>
 
         {/* Control Center Toggle */}
         <button
@@ -471,15 +413,13 @@ export const Menubar: React.FC<MenubarProps> = ({
           <Sliders className="w-3.5 h-3.5" />
         </button>
 
-        {/* Live Date & Time Clock with Calendar Flyout */}
+        {/* Live Date & Time Clock */}
         <div className="relative">
           <button
             id="clock-btn"
             onClick={() => {
               sound.playClick();
-              setShowCalendarFlyout(!showCalendarFlyout);
               setShowBatteryFlyout(false);
-              setShowWifiFlyout(false);
               setActiveMenu(null);
             }}
             className="flex items-center gap-1.5 px-2 py-0.5 rounded hover:bg-white/20 transition-colors font-medium"
@@ -487,30 +427,6 @@ export const Menubar: React.FC<MenubarProps> = ({
             <span className="hidden sm:inline text-white/80">{dateString}</span>
             <span className="font-semibold text-white">{timeString}</span>
           </button>
-
-          {showCalendarFlyout && (
-            <div className="absolute top-7 right-0 w-64 bg-slate-900/95 backdrop-blur-2xl border border-white/15 rounded-xl shadow-2xl p-3 z-50 text-white animate-in fade-in zoom-in-95 duration-100">
-              <div className="flex items-center justify-between pb-2 border-b border-white/10">
-                <span className="font-semibold text-sm">
-                  {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-                </span>
-                <CalendarIcon className="w-4 h-4 text-blue-400" />
-              </div>
-              <div className="mt-2 text-center py-2 bg-white/5 rounded-lg border border-white/5">
-                <div className="text-3xl font-extrabold text-white">
-                  {new Date().getDate()}
-                </div>
-                <div className="text-xs text-blue-400 font-medium">
-                  {new Date().toLocaleDateString('en-US', { weekday: 'long' })}
-                </div>
-              </div>
-              <div className="mt-2 text-[11px] text-slate-300">
-                <div className="p-1.5 bg-blue-500/10 border border-blue-500/20 rounded text-blue-200">
-                  ⚡ Open to Full-Stack, AI Engineering & Software roles.
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>

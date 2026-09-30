@@ -13,7 +13,7 @@ try {
     const parsed = JSON.parse(raw);
     const cleaned = parsed.map((p: any) => ({
       ...p,
-      imageUrl: typeof p.imageUrl === 'string' && p.imageUrl.startsWith('http') ? p.imageUrl : undefined,
+      imageUrl: typeof p.imageUrl === 'string' && (p.imageUrl.startsWith('/') || p.imageUrl.startsWith('http')) ? p.imageUrl : undefined,
     }));
     localStorage.setItem('portfolio_photos', JSON.stringify(cleaned));
   }

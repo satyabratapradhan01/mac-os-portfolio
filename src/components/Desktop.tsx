@@ -22,7 +22,6 @@ import {
 interface DesktopProps {
   onOpenApp: (id: AppId) => void;
   onOpenAboutMac: () => void;
-  onOpenSettings: () => void;
   onOpenTerminal: () => void;
 }
 
@@ -228,7 +227,6 @@ const HeroHeading: React.FC = () => {
 export const Desktop: React.FC<DesktopProps> = ({
   onOpenApp,
   onOpenAboutMac,
-  onOpenSettings,
   onOpenTerminal,
 }) => {
   const { projects } = usePortfolio();

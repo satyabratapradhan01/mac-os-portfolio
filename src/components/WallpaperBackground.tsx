@@ -9,15 +9,16 @@ export const WallpaperBackground: React.FC<WallpaperBackgroundProps> = ({
   wallpaperId,
   customWallpaperUrl,
 }) => {
-  // If user uploaded a custom wallpaper image file/URL
-  if (customWallpaperUrl) {
+  const activeImage = customWallpaperUrl || (wallpaperId === 'macos-fluid-wave' ? '/assets/wallpapers/macos-blue-wave.png' : null);
+
+  // If wallpaper image is available (uploaded or stored blue wave image)
+  if (activeImage) {
     return (
       <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none">
         <img
-          src={customWallpaperUrl}
+          src={activeImage}
           alt="Desktop Wallpaper"
           className="w-full h-full object-cover"
-          referrerPolicy="no-referrer"
         />
       </div>
     );

@@ -8,7 +8,6 @@ export type AppId =
   | 'resume'
   | 'music'
   | 'calculator'
-  | 'settings'
   | 'messages'
   | 'trash'
   | 'aboutMac';
@@ -44,6 +43,7 @@ export interface ProjectItem {
   accentColor: string;
   showOnDesktop?: boolean;
   desktopFolderIndex?: number;
+  coverImageUrl?: string;
   screenshots: {
     title: string;
     caption: string;
@@ -134,6 +134,7 @@ export interface WallpaperOption {
   theme: 'dark' | 'light' | 'dynamic';
   previewGradient: string;
   bgStyle: string;
+  bgImage?: string;
 }
 
 export interface DesktopIconItem {

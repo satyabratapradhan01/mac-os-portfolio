@@ -65,12 +65,6 @@ const DOCK_ITEMS: DockItemDef[] = [
     icon: Terminal,
   },
   {
-    id: 'settings',
-    name: 'System Settings',
-    gradient: 'from-slate-400 via-zinc-500 to-slate-600',
-    icon: Settings,
-  },
-  {
     id: 'trash',
     name: 'Trash',
     gradient: 'from-slate-700 via-slate-800 to-zinc-900',

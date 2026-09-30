@@ -6,7 +6,6 @@ import { sound } from './utils/sound';
 // Components
 import { Menubar } from './components/Menubar';
 import { ControlCenter } from './components/ControlCenter';
-import { Spotlight } from './components/Spotlight';
 import { Dock } from './components/Dock';
 import { Desktop } from './components/Desktop';
 import { WindowFrame } from './components/WindowFrame';
@@ -24,7 +23,6 @@ import { NotesApp } from './components/apps/NotesApp';
 import { ResumeApp } from './components/apps/ResumeApp';
 import { MusicApp } from './components/apps/MusicApp';
 import { CalculatorApp } from './components/apps/CalculatorApp';
-import { SettingsApp } from './components/apps/SettingsApp';
 import { MessagesApp } from './components/apps/MessagesApp';
 import { TrashApp } from './components/apps/TrashApp';
 import { PortfolioProvider } from './context/PortfolioContext';
@@ -138,18 +136,6 @@ const DEFAULT_WINDOWS: Record<AppId, WindowState> = {
     initialSize: { width: 280, height: 400 },
     minSize: { width: 250, height: 360 },
   },
-  settings: {
-    id: 'settings',
-    title: 'System Settings',
-    isOpen: false,
-    isMinimized: false,
-    isMaximized: false,
-    zIndex: 2,
-    position: { x: 145, y: 75 },
-    size: { width: 700, height: 460 },
-    initialSize: { width: 700, height: 460 },
-    minSize: { width: 500, height: 340 },
-  },
   messages: {
     id: 'messages',
     title: 'Contact Me',
@@ -195,7 +181,6 @@ export default function App() {
 
   // System States
   const [isControlCenterOpen, setIsControlCenterOpen] = useState(false);
-  const [isSpotlightOpen, setIsSpotlightOpen] = useState(false);
   const [isAboutMacOpen, setIsAboutMacOpen] = useState(false);
   const [isLocked, setIsLocked] = useState(false);
   const [selectedWallpaperId, setSelectedWallpaperId] = useState('macos-fluid-wave');
@@ -345,15 +330,8 @@ export default function App() {
   // Global Keyboard Shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Cmd+K or Cmd+Space -> Toggle Spotlight
-      if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === ' ')) {
-        e.preventDefault();
-        sound.playClick();
-        setIsSpotlightOpen((prev) => !prev);
-      }
       // Esc -> close overlays
       if (e.key === 'Escape') {
-        setIsSpotlightOpen(false);
         setIsControlCenterOpen(false);
         setIsAboutMacOpen(false);
       }
@@ -388,7 +366,6 @@ export default function App() {
           onOpenApp={openApp}
           onToggleControlCenter={() => setIsControlCenterOpen(!isControlCenterOpen)}
           isControlCenterOpen={isControlCenterOpen}
-          onToggleSpotlight={() => setIsSpotlightOpen(!isSpotlightOpen)}
           onLockScreen={() => setIsLocked(true)}
           onOpenAboutMac={() => setIsAboutMacOpen(true)}
           soundEnabled={soundEnabled}
@@ -417,18 +394,10 @@ export default function App() {
           onOpenApp={openApp}
         />
 
-        {/* 3. Spotlight Search Modal */}
-        <Spotlight
-          isOpen={isSpotlightOpen}
-          onClose={() => setIsSpotlightOpen(false)}
-          onOpenApp={openApp}
-        />
-
         {/* 4. Desktop Canvas & Icons */}
         <Desktop
           onOpenApp={openApp}
           onOpenAboutMac={() => setIsAboutMacOpen(true)}
-          onOpenSettings={() => openApp('settings')}
           onOpenTerminal={() => openApp('terminal')}
         />
 
@@ -613,50 +582,6 @@ export default function App() {
             titleBarClassName="bg-[#2c2c2e] border-b border-white/5"
           >
             <CalculatorApp />
-          </WindowFrame>
-        )}
-
-        {/* Settings Window */}
-        {windows.settings.isOpen && (
-          <WindowFrame
-            windowState={windows.settings}
-            onClose={() => closeWindow('settings')}
-            onMinimize={() => minimizeWindow('settings')}
-            onMaximize={() => toggleMaximizeWindow('settings')}
-            onFocus={() => focusWindow('settings')}
-            onUpdatePosition={(x, y) => updatePosition('settings', x, y)}
-            onUpdateSize={(w, h) => updateSize('settings', w, h)}
-          >
-            <SettingsApp
-              selectedWallpaperId={selectedWallpaperId}
-              onSelectWallpaper={(id) => {
-                setSelectedWallpaperId(id);
-                if (id !== 'custom') {
-                  setCustomWallpaperUrl(null);
-                  localStorage.removeItem('macos_custom_wallpaper');
-                }
-              }}
-              customWallpaperUrl={customWallpaperUrl}
-              onSetCustomWallpaper={(url) => {
-                setCustomWallpaperUrl(url);
-                if (url) {
-                  localStorage.setItem('macos_custom_wallpaper', url);
-                } else {
-                  localStorage.removeItem('macos_custom_wallpaper');
-                }
-              }}
-              soundEnabled={soundEnabled}
-              onToggleSound={() => {
-                setSoundEnabled(!soundEnabled);
-                sound.setEnabled(!soundEnabled);
-              }}
-              isDarkMode={isDarkMode}
-              onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
-              brightness={brightness}
-              onBrightnessChange={setBrightness}
-              volume={volume}
-              onVolumeChange={setVolume}
-            />
           </WindowFrame>
         )}
 
