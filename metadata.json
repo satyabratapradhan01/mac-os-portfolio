@@ -1,0 +1,6 @@
+{
+  "name": "macOS Developer Portfolio",
+  "description": "An interactive macOS desktop operating system portfolio showcasing projects, experience, interactive terminal, Finder, code editor, photo gallery, and developer applications.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
