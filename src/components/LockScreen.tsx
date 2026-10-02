@@ -70,8 +70,12 @@ export const LockScreen: React.FC<LockScreenProps> = ({ isLocked, onUnlock }) =>
       {/* Center User Profile & Unlock Field */}
       <div className="flex flex-col items-center max-w-xs w-full space-y-4">
         <div className="relative">
-          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-blue-600 via-indigo-600 to-cyan-500 border-4 border-white/30 shadow-2xl flex items-center justify-center font-black text-2xl text-white">
-            SP
+          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-4 border-white/30 shadow-2xl overflow-hidden bg-slate-800 flex items-center justify-center">
+            <img
+              src={DEVELOPER_PROFILE.avatar}
+              alt={DEVELOPER_PROFILE.name}
+              className="w-full h-full object-cover"
+            />
           </div>
           <span className="absolute bottom-0 right-0 w-5 h-5 rounded-full bg-emerald-500 border-2 border-slate-900" />
         </div>

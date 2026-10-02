@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { AppId, ProjectItem } from '../../types';
 import { DEVELOPER_PROFILE } from '../../data/portfolioData';
 import { usePortfolio } from '../../context/PortfolioContext';
@@ -35,40 +36,31 @@ interface FileItem {
   description?: string;
 }
 
-// Custom macOS Finder File Icon Renderers (light theme)
+// Custom Ultra-Modern macOS Finder File & Link Icon Renderers
 const MacTxtIcon: React.FC = () => (
-  <div className="relative w-14 h-16 bg-gradient-to-b from-white to-slate-100 rounded-sm shadow border border-slate-300 flex flex-col p-1.5 overflow-hidden group-hover:shadow-md transition-shadow">
-    {/* Dog ear fold */}
-    <div className="absolute top-0 right-0 w-3.5 h-3.5 bg-slate-200 rounded-bl-sm border-l border-b border-slate-300" />
-    <div className="absolute top-0 right-0 w-0 h-0 border-t-[14px] border-t-slate-400 border-l-[14px] border-l-transparent pointer-events-none opacity-20" />
-
-    {/* Text Lines */}
-    <div className="space-y-1 mt-1 pr-1.5">
-      <div className="h-1 bg-slate-400 rounded-full w-full" />
-      <div className="h-1 bg-slate-300 rounded-full w-4/5" />
-      <div className="h-1 bg-slate-300 rounded-full w-full" />
-      <div className="h-1 bg-slate-400/70 rounded-full w-3/4" />
-      <div className="h-1 bg-slate-300 rounded-full w-5/6" />
-      <div className="h-1 bg-slate-300 rounded-full w-2/3" />
-      <div className="h-1 bg-slate-400/60 rounded-full w-4/5" />
-    </div>
+  <div className="relative w-14 h-16 group-hover:-translate-y-1 transition-all duration-300 ease-out select-none flex items-center justify-center">
+    <div className="absolute inset-x-1 -bottom-1 h-3 bg-blue-500/15 rounded-full blur-md group-hover:bg-blue-500/35 group-hover:blur-lg transition-all duration-300" />
+    <img
+      src="/icons/txt-document.png"
+      alt="TXT Document"
+      className="w-full h-full object-contain filter drop-shadow-md group-hover:scale-105 transition-transform duration-300"
+    />
   </div>
 );
 
 const MacSafariIcon: React.FC = () => (
-  <div className="w-14 h-14 bg-white rounded-2xl shadow border border-slate-200 flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform">
-    <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-sky-500 via-blue-600 to-indigo-600 flex items-center justify-center relative shadow-inner">
-      {/* Compass Ring */}
-      <div className="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center">
-        {/* Compass Needle */}
-        <div className="w-1 h-8 bg-gradient-to-b from-red-500 via-red-400 to-slate-200 rotate-45 rounded-full shadow-sm" />
-      </div>
-    </div>
+  <div className="relative w-14 h-14 group-hover:-translate-y-1 transition-all duration-300 ease-out select-none flex items-center justify-center">
+    <div className="absolute inset-x-1 -bottom-1 h-3 bg-sky-500/20 rounded-full blur-md group-hover:bg-sky-500/40 group-hover:blur-lg transition-all duration-300" />
+    <img
+      src="/icons/safari.png"
+      alt="Safari Link"
+      className="w-full h-full object-contain filter drop-shadow-md group-hover:scale-105 transition-transform duration-300"
+    />
   </div>
 );
 
 const MacPngIcon: React.FC<{ imageUrl?: string }> = ({ imageUrl }) => (
-  <div className="relative w-14 h-16 bg-white rounded-sm shadow border border-slate-300 flex flex-col p-1 overflow-hidden group-hover:shadow-md transition-shadow">
+  <div className="relative w-16 h-18 bg-white rounded-lg shadow border border-slate-300 flex flex-col p-1 overflow-hidden group-hover:shadow-md transition-shadow">
     {/* Dog ear fold */}
     <div className="absolute top-0 right-0 w-3.5 h-3.5 bg-slate-100 rounded-bl-sm border-l border-b border-slate-300" />
 
@@ -91,7 +83,7 @@ const MacPngIcon: React.FC<{ imageUrl?: string }> = ({ imageUrl }) => (
 );
 
 const MacDesignIcon: React.FC = () => (
-  <div className="relative w-14 h-16 bg-gradient-to-b from-white to-slate-100 rounded-sm shadow border border-slate-300 flex flex-col items-center justify-center p-1.5 overflow-hidden group-hover:shadow-md transition-shadow">
+  <div className="relative w-16 h-18 bg-gradient-to-b from-white to-slate-100 rounded-lg shadow border border-slate-300 flex flex-col items-center justify-center p-1.5 overflow-hidden group-hover:shadow-md transition-shadow">
     {/* Dog ear fold */}
     <div className="absolute top-0 right-0 w-3.5 h-3.5 bg-slate-200 rounded-bl-sm border-l border-b border-slate-300" />
 
@@ -103,15 +95,166 @@ const MacDesignIcon: React.FC = () => (
 );
 
 const MacFolderIcon: React.FC = () => (
-  <div className="w-16 h-13 relative group-hover:scale-105 transition-transform">
-    {/* Back tab */}
-    <div className="w-7 h-3 bg-blue-500 rounded-t-md absolute -top-1.5 left-1 shadow-sm" />
-    {/* Main folder body */}
-    <div className="w-16 h-12 bg-gradient-to-b from-blue-300 via-blue-400 to-blue-500 rounded-lg shadow border border-blue-300/50 flex items-center justify-center">
-      <div className="w-14 h-9 bg-blue-200/40 rounded border border-white/30" />
+  <div className="relative w-16 h-14 group-hover:-translate-y-1 group-hover:scale-105 transition-all duration-300 ease-out select-none">
+    {/* Folder Back Tab */}
+    <div className="w-7 h-3 bg-gradient-to-r from-blue-500 to-blue-600 rounded-t-md absolute -top-1.5 left-1 shadow-xs border-t border-l border-r border-blue-400/60" />
+    {/* Main Folder Front Body */}
+    <div className="w-full h-full bg-gradient-to-b from-sky-400 via-blue-500 to-blue-600 rounded-xl shadow-[0_8px_20px_rgba(37,99,235,0.35)] border border-sky-300/60 flex items-center justify-center relative overflow-hidden group-hover:shadow-[0_12px_26px_rgba(37,99,235,0.45)] transition-all duration-300">
+      {/* Top Glass Lens sheen */}
+      <div className="absolute top-0 inset-x-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent rounded-t-xl pointer-events-none" />
+      {/* Folder Inner Card */}
+      <div className="w-13 h-8 rounded-lg bg-white/20 backdrop-blur-xs border border-white/35 shadow-inner" />
     </div>
   </div>
 );
+
+// Helper to format clean TextEdit prose paragraphs matching Image 1
+const formatProjectTxtProse = (project: ProjectItem): string[] => {
+  if (project.id === 'devpilot-ai') {
+    return [
+      "Our DevPilot App is an in-browser AI-powered web application builder that converts natural language prompts into complete, production-ready React and Node.js projects.",
+      "Instead of manually configuring backends, installing npm packages, or spinning up external cloud containers, DevPilot embeds an entire Node.js runtime inside your browser using WASM-based WebContainers to run dev servers and render live previews instantly.",
+      "Think of it like having an expert full-stack AI engineer inside your browser—ready to generate, mount, and run complete web applications in real time with an interactive Monaco code editor.",
+      "It's built with React.js, Node.js, and TypeScript, utilizing Google Gemini 2.5 Flash as the primary LLM with Groq LLaMA 3.3 70B automatic fallback routing."
+    ];
+  }
+  if (project.id === 'job-tracker-ai') {
+    return [
+      "Our AI-Powered Job Application Tracker is a modern management platform that helps job seekers organize, monitor, and optimize their job search pipeline end-to-end.",
+      "Instead of tracking applications in scattered spreadsheets or missing follow-up dates, users can manage interview stages, organize applications, and get AI-guided resume feedback in real time.",
+      "Think of it like having a personal career co-pilot—keeping your search organized and matching your resume directly against target job descriptions.",
+      "It's built with React.js, Node.js, Express.js, and MongoDB, integrating the Claude API for intelligent resume matching and application insights."
+    ];
+  }
+  if (project.id === 'clothify-ecommerce') {
+    return [
+      "Our Clothify E-Commerce Platform is a fast and convenient way to shop online with role-based customer and admin management.",
+      "Instead of slow checkout flows or fragmented order systems, Clothify features real-time cart synchronization, secure user dashboards, and instant payment processing.",
+      "Think of it like having your favorite clothing store in your pocket—ready to deliver seamless product browsing and secure payments anytime, anywhere.",
+      "It's built with React.js, Node.js, Express.js, and MongoDB, featuring Stripe payment gateway integration and Cloudinary cloud media storage."
+    ];
+  }
+  if (project.id === 'wanderlust-hotel') {
+    return [
+      "Our Wanderlust Booking App is an intuitive hotel and vacation rental platform designed for effortless travel planning.",
+      "Instead of tedious booking processes, users can explore curated accommodation listings, view interactive map locations, and reserve stays with instant confirmation.",
+      "Think of it like having a global travel concierge—ready to find and book top-rated stays worldwide.",
+      "It's built with Node.js, Express.js, MongoDB, and EJS, using Mapbox API for location mapping and Passport.js for secure user sessions."
+    ];
+  }
+
+  return [
+    project.description,
+    project.tagline,
+    project.longDescription.split('\n\n')[0] || project.description,
+    `It's built with ${project.techStack.slice(0, 4).join(', ')} with a clean, modern design.`
+  ];
+};
+
+// Floating Draggable macOS TextEdit Window Component (Matching Image 2)
+interface ProjectTxtWindowProps {
+  file: {
+    title: string;
+    type: 'txt' | 'png' | 'url';
+    project?: ProjectItem;
+    imageUrl?: string;
+  };
+  onClose: () => void;
+}
+
+const ProjectTxtWindow: React.FC<ProjectTxtWindowProps> = ({ file, onClose }) => {
+  // Initial floating position on the right side of the screen outside of Finder (matching Image 2)
+  const [position, setPosition] = useState(() => {
+    const defaultX = Math.max(20, Math.min(window.innerWidth - 470, window.innerWidth / 2 + 80));
+    const defaultY = Math.max(60, Math.min(window.innerHeight - 450, 110));
+    return { x: defaultX, y: defaultY };
+  });
+
+  const isDragging = useRef(false);
+  const dragStart = useRef({ x: 0, y: 0 });
+  const initialPos = useRef({ x: 0, y: 0 });
+
+  const handleMouseDownHeader = (e: React.MouseEvent) => {
+    if (e.button !== 0) return;
+    if ((e.target as HTMLElement).closest('button, input, select, textarea, a')) return;
+
+    isDragging.current = true;
+    dragStart.current = { x: e.clientX, y: e.clientY };
+    initialPos.current = { x: position.x, y: position.y };
+
+    const handleMouseMove = (ev: MouseEvent) => {
+      if (!isDragging.current) return;
+      const dx = ev.clientX - dragStart.current.x;
+      const dy = ev.clientY - dragStart.current.y;
+
+      const newX = Math.max(10, Math.min(window.innerWidth - 200, initialPos.current.x + dx));
+      const newY = Math.max(30, Math.min(window.innerHeight - 100, initialPos.current.y + dy));
+
+      setPosition({ x: newX, y: newY });
+    };
+
+    const handleMouseUp = () => {
+      isDragging.current = false;
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+  };
+
+  return createPortal(
+    <div
+      className="fixed z-[99999] top-0 left-0 bg-white border border-slate-200/90 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.3)] w-[450px] max-w-[90vw] overflow-hidden text-slate-800 flex flex-col select-none animate-in fade-in zoom-in-95 duration-150"
+      style={{
+        transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
+      }}
+    >
+      {/* macOS Window Title Bar - DRAGGABLE HEADER */}
+      <div
+        onMouseDown={handleMouseDownHeader}
+        className="h-9 px-4 bg-slate-50/95 border-b border-slate-200/80 flex items-center justify-between shrink-0 cursor-grab active:cursor-grabbing"
+      >
+        {/* Traffic Light Dots */}
+        <div className="flex items-center gap-1.5">
+          <button
+            onClick={onClose}
+            className="w-3 h-3 rounded-full bg-[#ff5f56] border border-black/10 hover:opacity-80 transition-opacity flex items-center justify-center group"
+            title="Close"
+          >
+            <X className="w-2 h-2 text-black/60 opacity-0 group-hover:opacity-100" />
+          </button>
+          <div className="w-3 h-3 rounded-full bg-[#ffbd2e] border border-black/10" />
+          <div className="w-3 h-3 rounded-full bg-[#27c93f] border border-black/10" />
+        </div>
+
+        {/* Centered Document Title */}
+        <span className="text-xs font-semibold text-slate-500 font-sans tracking-tight truncate px-2 max-w-[260px]">
+          {file.title}
+        </span>
+
+        {/* Right Side Search Icon */}
+        <div className="w-12 flex justify-end">
+          <Search className="w-3.5 h-3.5 text-slate-300" />
+        </div>
+      </div>
+
+      {/* Document Body (Matching Image 1 & 2) */}
+      <div className="p-6 sm:p-7 space-y-4 font-sans text-xs sm:text-sm text-slate-700 leading-relaxed overflow-y-auto max-h-[60vh] select-text">
+        {file.project ? (
+          formatProjectTxtProse(file.project).map((paragraph, idx) => (
+            <p key={idx} className="text-slate-700 leading-relaxed">
+              {paragraph}
+            </p>
+          ))
+        ) : (
+          <p className="text-slate-700">{file.title}</p>
+        )}
+      </div>
+    </div>,
+    document.body
+  );
+};
 
 export const FinderApp: React.FC<FinderAppProps> = ({ onOpenApp }) => {
   const { projects } = usePortfolio();
@@ -190,21 +333,6 @@ export const FinderApp: React.FC<FinderAppProps> = ({ onOpenApp }) => {
         url: project.liveUrl,
         project: project,
       },
-      {
-        id: `${project.id}-png`,
-        name: `${project.id.toLowerCase()}.png`,
-        type: 'png',
-        label: `${project.id.toLowerCase()}.png`,
-        imageUrl: project.screenshots?.[0]?.imageUrl,
-        project: project,
-      },
-      {
-        id: `${project.id}-fig`,
-        name: 'Design.fig',
-        type: 'fig',
-        label: 'Design.fig',
-        project: project,
-      },
     ];
   };
 
@@ -234,8 +362,8 @@ export const FinderApp: React.FC<FinderAppProps> = ({ onOpenApp }) => {
                   setViewMode('work-all');
                 }}
                 className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-xs font-medium transition-colors ${viewMode === 'work-all'
-                    ? 'bg-[#d0d0d0] text-slate-900 shadow-sm font-semibold'
-                    : 'text-slate-600 hover:bg-black/5'
+                  ? 'bg-[#d0d0d0] text-slate-900 shadow-sm font-semibold'
+                  : 'text-slate-600 hover:bg-black/5'
                   }`}
               >
                 <Briefcase className="w-4 h-4 text-blue-500 shrink-0" />
@@ -249,8 +377,8 @@ export const FinderApp: React.FC<FinderAppProps> = ({ onOpenApp }) => {
                   setViewMode('about');
                 }}
                 className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-xs font-medium transition-colors ${viewMode === 'about'
-                    ? 'bg-[#d0d0d0] text-slate-900 shadow-sm font-semibold'
-                    : 'text-slate-600 hover:bg-black/5'
+                  ? 'bg-[#d0d0d0] text-slate-900 shadow-sm font-semibold'
+                  : 'text-slate-600 hover:bg-black/5'
                   }`}
               >
                 <Info className="w-4 h-4 text-sky-500 shrink-0" />
@@ -265,8 +393,8 @@ export const FinderApp: React.FC<FinderAppProps> = ({ onOpenApp }) => {
                   onOpenApp('resume');
                 }}
                 className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-xs font-medium transition-colors ${viewMode === 'resume'
-                    ? 'bg-[#d0d0d0] text-slate-900 shadow-sm font-semibold'
-                    : 'text-slate-600 hover:bg-black/5'
+                  ? 'bg-[#d0d0d0] text-slate-900 shadow-sm font-semibold'
+                  : 'text-slate-600 hover:bg-black/5'
                   }`}
               >
                 <FileText className="w-4 h-4 text-blue-500 shrink-0" />
@@ -280,8 +408,8 @@ export const FinderApp: React.FC<FinderAppProps> = ({ onOpenApp }) => {
                   setViewMode('trash');
                 }}
                 className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-xs font-medium transition-colors ${viewMode === 'trash'
-                    ? 'bg-[#d0d0d0] text-slate-900 shadow-sm font-semibold'
-                    : 'text-slate-600 hover:bg-black/5'
+                  ? 'bg-[#d0d0d0] text-slate-900 shadow-sm font-semibold'
+                  : 'text-slate-600 hover:bg-black/5'
                   }`}
               >
                 <Trash2 className="w-4 h-4 text-blue-500 shrink-0" />
@@ -310,8 +438,8 @@ export const FinderApp: React.FC<FinderAppProps> = ({ onOpenApp }) => {
                       setViewMode('project-folder');
                     }}
                     className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-xs font-medium transition-colors ${isSelected
-                        ? 'bg-[#d0d0d0] text-slate-900 shadow-sm font-semibold'
-                        : 'text-slate-600 hover:bg-black/5'
+                      ? 'bg-[#d0d0d0] text-slate-900 shadow-sm font-semibold'
+                      : 'text-slate-600 hover:bg-black/5'
                       }`}
                   >
                     <Folder className="w-4 h-4 fill-blue-400 text-blue-500 shrink-0" />
@@ -401,8 +529,10 @@ export const FinderApp: React.FC<FinderAppProps> = ({ onOpenApp }) => {
                   return (
                     <div
                       key={file.id}
-                      onClick={() => setSelectedFileId(file.id)}
-                      onDoubleClick={() => handleFileItemDoubleClick(file)}
+                      onClick={() => {
+                        setSelectedFileId(file.id);
+                        handleFileItemDoubleClick(file);
+                      }}
                       className={`flex flex-col items-center gap-2 p-2 rounded-lg cursor-pointer group transition-all ${isSelected ? 'bg-blue-500/20 ring-1 ring-blue-400' : 'hover:bg-black/5'
                         }`}
                     >
@@ -423,7 +553,7 @@ export const FinderApp: React.FC<FinderAppProps> = ({ onOpenApp }) => {
 
               {/* Quick Hint at bottom */}
               <div className="mt-12 text-center text-[11px] text-slate-400 font-mono">
-                Double-click any file to preview or open link
+                Click any file to open preview or web link
               </div>
             </div>
           )}
@@ -434,9 +564,9 @@ export const FinderApp: React.FC<FinderAppProps> = ({ onOpenApp }) => {
               {filteredProjects.map((proj) => (
                 <div
                   key={proj.id}
-                  onClick={() => setSelectedFileId(proj.id)}
-                  onDoubleClick={() => {
+                  onClick={() => {
                     sound.playClick();
+                    setSelectedFileId(proj.id);
                     setSelectedProjectId(proj.id);
                     setViewMode('project-folder');
                   }}
@@ -456,8 +586,12 @@ export const FinderApp: React.FC<FinderAppProps> = ({ onOpenApp }) => {
           {viewMode === 'about' && (
             <div className="max-w-xl mx-auto bg-white border border-slate-200 rounded-xl p-6 space-y-6 shadow-sm">
               <div className="flex items-center gap-5">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-blue-600 via-indigo-600 to-cyan-500 border-2 border-blue-300 shadow flex items-center justify-center font-black text-xl text-white">
-                  SP
+                <div className="w-20 h-20 rounded-full border-2 border-blue-400/40 shadow overflow-hidden shrink-0 bg-slate-100 flex items-center justify-center">
+                  <img
+                    src={DEVELOPER_PROFILE.avatar}
+                    alt={DEVELOPER_PROFILE.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div>
                   <h2 className="text-lg font-bold text-slate-900">{DEVELOPER_PROFILE.name}</h2>
@@ -466,9 +600,28 @@ export const FinderApp: React.FC<FinderAppProps> = ({ onOpenApp }) => {
                 </div>
               </div>
 
-              <p className="text-xs text-slate-600 leading-relaxed bg-slate-50 p-3.5 rounded-lg border border-slate-200">
-                {DEVELOPER_PROFILE.bio}
-              </p>
+              <div className="space-y-4 text-xs text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div className="space-y-2 whitespace-pre-line">
+                  {DEVELOPER_PROFILE.bio}
+                </div>
+
+                {DEVELOPER_PROFILE.whatILoveBuilding && (
+                  <div className="pt-3 border-t border-slate-200">
+                    <h4 className="font-bold text-slate-900 text-xs mb-2">What I Love Building</h4>
+                    <ul className="list-disc list-inside space-y-1 text-slate-600">
+                      {DEVELOPER_PROFILE.whatILoveBuilding.map((item, idx) => (
+                        <li key={idx}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {DEVELOPER_PROFILE.bioTagline && (
+                  <p className="pt-2 text-slate-700 italic border-t border-slate-200/60">
+                    {DEVELOPER_PROFILE.bioTagline}
+                  </p>
+                )}
+              </div>
 
               <div className="grid grid-cols-2 gap-3">
                 {DEVELOPER_PROFILE.stats.map((st) => (
@@ -505,138 +658,16 @@ export const FinderApp: React.FC<FinderAppProps> = ({ onOpenApp }) => {
           {/* 4. TRASH VIEW */}
           {viewMode === 'trash' && (
             <div className="flex flex-col items-center justify-center h-64 text-slate-400">
-              <Trash2 className="w-12 h-12 mb-3 stroke-1" />
+              <img src="/icons/trash.png" alt="Trash" className="w-16 h-16 mb-3 object-contain opacity-80" />
               <span className="text-xs font-medium">Trash is empty</span>
             </div>
           )}
         </div>
       </div>
 
-      {/* -------------------- QUICK LOOK PREVIEW MODAL -------------------- */}
+      {/* -------------------- FLOATING DRAGGABLE TEXTEDIT WINDOW -------------------- */}
       {quickLookFile && (
-        <div
-          className="absolute inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center p-6"
-          onClick={() => setQuickLookFile(null)}
-        >
-          <div
-            className="bg-white border border-slate-200 rounded-xl shadow-2xl w-full max-w-lg overflow-hidden text-slate-800 flex flex-col max-h-[85%]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Quick Look Header */}
-            <div className="h-9 px-4 bg-[#ececec] border-b border-slate-300 flex items-center justify-between shrink-0">
-              <div className="flex items-center gap-2">
-                <Eye className="w-3.5 h-3.5 text-blue-500" />
-                <span className="text-xs font-semibold text-slate-800 truncate">{quickLookFile.title}</span>
-              </div>
-              <button
-                onClick={() => setQuickLookFile(null)}
-                className="p-1 rounded hover:bg-black/10 text-slate-400 hover:text-slate-700"
-              >
-                <X className="w-3.5 h-3.5" />
-              </button>
-            </div>
-
-            {/* Quick Look Content */}
-            <div className="p-5 overflow-y-auto space-y-4">
-              {quickLookFile.type === 'txt' && quickLookFile.project && (
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="text-base font-bold text-slate-900">{quickLookFile.project.title}</h3>
-                    <p className="text-xs text-blue-500 font-medium mt-0.5">{quickLookFile.project.tagline}</p>
-                  </div>
-
-                  <div className="bg-slate-50 p-3.5 rounded-lg border border-slate-200 font-mono text-xs text-slate-600 leading-relaxed whitespace-pre-line">
-                    {quickLookFile.project.longDescription}
-                  </div>
-
-                  {/* Highlights */}
-                  <div>
-                    <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block mb-2">
-                      Key Performance Highlights
-                    </span>
-                    <div className="grid grid-cols-2 gap-2">
-                      {quickLookFile.project.metrics.map((m, idx) => (
-                        <div key={idx} className="bg-emerald-50 p-2 rounded border border-emerald-200 text-[11px] font-mono text-emerald-700">
-                          ⚡ {m}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Tech Stack */}
-                  <div>
-                    <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block mb-2">
-                      Tech Stack
-                    </span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {quickLookFile.project.techStack.map((t) => (
-                        <span key={t} className="text-xs px-2 py-0.5 rounded bg-slate-100 font-mono text-slate-600 border border-slate-200">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {quickLookFile.type === 'png' && (
-                <div className="space-y-3">
-                  <div className="rounded-lg overflow-hidden border border-slate-200 bg-slate-50">
-                    {quickLookFile.imageUrl ? (
-                      <img
-                        src={quickLookFile.imageUrl}
-                        alt="Project Screenshot"
-                        className="w-full h-auto object-contain max-h-[360px]"
-                        referrerPolicy="no-referrer"
-                      />
-                    ) : (
-                      <div className="h-64 flex items-center justify-center text-slate-400 font-mono">
-                        No Screenshot Available
-                      </div>
-                    )}
-                  </div>
-                  {quickLookFile.project && (
-                    <div className="text-center text-xs text-slate-500">
-                      Screenshot preview for <span className="font-semibold text-slate-700">{quickLookFile.project.title}</span>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-
-            {/* Quick Look Footer Action */}
-            <div className="p-3 bg-[#f5f5f5] border-t border-slate-200 flex justify-end gap-2 shrink-0">
-              {quickLookFile.project?.liveUrl && (
-                <button
-                  onClick={() => {
-                    window.open(quickLookFile.project?.liveUrl, '_blank');
-                  }}
-                  className="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-medium flex items-center gap-1.5"
-                >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  <span>Open Live Demo</span>
-                </button>
-              )}
-              {quickLookFile.project?.githubUrl && (
-                <button
-                  onClick={() => {
-                    window.open(quickLookFile.project?.githubUrl, '_blank');
-                  }}
-                  className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 border border-slate-300"
-                >
-                  <Code className="w-3.5 h-3.5" />
-                  <span>Code</span>
-                </button>
-              )}
-              <button
-                onClick={() => setQuickLookFile(null)}
-                className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-medium border border-slate-200"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
+        <ProjectTxtWindow file={quickLookFile} onClose={() => setQuickLookFile(null)} />
       )}
     </div>
   );

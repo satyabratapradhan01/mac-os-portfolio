@@ -153,7 +153,7 @@ export const TerminalApp: React.FC<TerminalAppProps> = ({ onOpenApp }) => {
         output = (
           <div className="space-y-2 text-xs text-slate-200 font-sans">
             <div className="font-bold text-sm text-white">{DEVELOPER_PROFILE.name} — {DEVELOPER_PROFILE.title}</div>
-            <p className="leading-relaxed text-slate-300">{DEVELOPER_PROFILE.bio}</p>
+            <p className="leading-relaxed text-slate-300 whitespace-pre-line">{DEVELOPER_PROFILE.bio}</p>
             <div className="text-blue-400 font-mono">Email: {DEVELOPER_PROFILE.email} | Phone: {DEVELOPER_PROFILE.phone}</div>
             <div className="text-slate-400 font-mono">LinkedIn: {DEVELOPER_PROFILE.linkedin}</div>
             <div className="text-slate-400 font-mono">GitHub: {DEVELOPER_PROFILE.github}</div>

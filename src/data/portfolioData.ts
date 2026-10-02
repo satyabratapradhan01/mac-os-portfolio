@@ -24,7 +24,21 @@ export const DEVELOPER_PROFILE = {
   linkedinUsername: 'satyabratapradhann',
   leetcode: 'https://leetcode.com/u/satyabratapradhan/',
   takeuforward: 'https://takeuforward.org/profile/satyabratapradhan',
-  bio: 'Full-Stack and AI Systems Engineer passionate about building in-browser runtimes with WebContainers, Gemini 2.5 Flash LLM orchestration, scalable MERN architectures, and solving complex algorithmic challenges. Solved 450+ DSA problems across LeetCode and TakeUForward.',
+  bio: `Hi, I’m Satyabrata Pradhan (Satya) — a 2026 B.Tech Computer Science graduate and aspiring Software Engineer who enjoys building real-world web applications and solving challenging problems.
+
+I specialize in full-stack development, with hands-on experience in React.js, Node.js, Express.js, MongoDB, Java, and JavaScript. I also enjoy working with Git, REST APIs, Docker, AWS, and DevOps tools to understand how applications are developed, deployed, and maintained.
+
+Currently, I’m expanding my skills in Generative AI, exploring how AI can be integrated into modern applications to build smarter and more useful developer tools.
+
+Alongside development, I regularly practice Data Structures & Algorithms to strengthen my problem-solving and programming fundamentals.`,
+  whatILoveBuilding: [
+    'Full-stack web applications',
+    'AI-powered applications and developer tools',
+    'Cloud & DevOps projects',
+    'Problem-solving with Java & DSA',
+    'Clean, scalable, and user-focused interfaces',
+  ],
+  bioTagline: 'I’m always curious to learn new technologies, build something from scratch, and turn ideas into working products.',
   stats: [
     { label: 'DSA Solved (TUF + LeetCode)', value: '450+' },
     { label: 'B.Tech CGPA', value: '8.1/10' },
