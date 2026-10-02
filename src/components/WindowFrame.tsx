@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { WindowState } from '../types';
 import { sound } from '../utils/sound';
 import { Minus, Square, X, Maximize2, Minimize2 } from 'lucide-react';
