@@ -289,9 +289,9 @@ export const SafariApp: React.FC<SafariAppProps> = ({
       <div className="flex-1 overflow-y-auto bg-white p-6 sm:p-10 md:p-12">
         <div className="max-w-2xl mx-auto">
           {/* Page Heading */}
-          <h1 className="text-xl sm:text-2xl font-bold text-[#db2777] mb-8 tracking-tight font-sans">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#db2777] mb-8 tracking-tight font-sans">
             My Developer Blog
-          </h1>
+          </h2>
 
           {/* Articles List */}
           <div className="space-y-8">

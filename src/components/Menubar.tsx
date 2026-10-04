@@ -110,7 +110,7 @@ export const Menubar: React.FC<MenubarProps> = ({
   const appTitle = activeAppId ? APP_NAMES[activeAppId] : 'Finder';
 
   return (
-    <div
+    <header
       id="macos-menubar"
       ref={menubarRef}
       className="fixed top-0 left-0 right-0 h-7 bg-slate-950/75 backdrop-blur-xl border-b border-white/10 z-[9999] px-3 flex items-center justify-between text-xs text-white/90 select-none shadow-sm"
@@ -429,6 +429,6 @@ export const Menubar: React.FC<MenubarProps> = ({
           </button>
         </div>
       </div>
-    </div>
+    </header>
   );
 };

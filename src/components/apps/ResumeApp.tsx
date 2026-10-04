@@ -27,9 +27,9 @@ export const ResumeApp: React.FC = () => {
         >
           {/* Header: Candidate Name & Links */}
           <div className="text-center space-y-1.5 pb-2">
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-[#1a2e5a] uppercase font-serif">
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#1a2e5a] uppercase font-serif">
               SATYABRATA PRADHAN
-            </h1>
+            </h2>
             <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10.5px] text-slate-700">
               <a
                 href={`mailto:${DEVELOPER_PROFILE.email}`}

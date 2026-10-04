@@ -128,9 +128,9 @@ export const MusicApp: React.FC<MusicAppProps> = ({
             <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-white/10 text-pink-300">
               Apple Music • Focus Radio
             </span>
-            <h1 className="text-xl md:text-2xl font-black text-white mt-2 truncate">
+            <h2 className="text-xl md:text-2xl font-black text-white mt-2 truncate">
               {song.title}
-            </h1>
+            </h2>
             <p className="text-xs text-slate-300 mt-1 font-medium">{song.artist}</p>
           </div>
 

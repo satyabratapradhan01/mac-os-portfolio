@@ -95,8 +95,9 @@ export const Dock: React.FC<DockProps> = ({ windows, onOpenApp, onCloseApp, acti
   };
 
   return (
-    <div
+    <nav
       id="macos-dock-container"
+      aria-label="Desktop Dock Navigation"
       className="fixed bottom-2 left-0 right-0 flex justify-center z-[9990] pointer-events-none px-4"
     >
       <div
@@ -178,6 +179,6 @@ export const Dock: React.FC<DockProps> = ({ windows, onOpenApp, onCloseApp, acti
           );
         })}
       </div>
-    </div>
+    </nav>
   );
 };

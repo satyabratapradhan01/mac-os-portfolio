@@ -395,11 +395,12 @@ export default function App() {
         />
 
         {/* 4. Desktop Canvas & Icons */}
-        <Desktop
-          onOpenApp={openApp}
-          onOpenAboutMac={() => setIsAboutMacOpen(true)}
-          onOpenTerminal={() => openApp('terminal')}
-        />
+        <main id="main-content" className="relative h-full w-full overflow-hidden">
+          <Desktop
+            onOpenApp={openApp}
+            onOpenAboutMac={() => setIsAboutMacOpen(true)}
+            onOpenTerminal={() => openApp('terminal')}
+          />
 
         {/* 5. Window Management Layer */}
         {/* Finder Window */}
@@ -618,6 +619,7 @@ export default function App() {
             <TrashApp />
           </WindowFrame>
         )}
+        </main>
 
         {/* 6. About This Mac Modal */}
         <AboutMacModal

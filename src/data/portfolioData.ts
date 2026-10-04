@@ -13,7 +13,7 @@ import {
 
 export const DEVELOPER_PROFILE = {
   name: 'Satyabrata Pradhan',
-  title: 'Full-Stack & DevOps Engineer',
+  title: 'Software Developer — Full-Stack, DevOps & AI',
   avatar: '/avatar.png',
   location: 'India (Open to Global & Remote Roles)',
   email: 'satyabratapradhann@gmail.com',

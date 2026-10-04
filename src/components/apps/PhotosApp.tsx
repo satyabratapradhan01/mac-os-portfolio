@@ -130,9 +130,9 @@ export const PhotosApp: React.FC = () => {
               <span>{activeSection}</span>
             </button>
           ) : (
-            <h1 className="text-sm font-semibold" style={{ color: '#111' }}>
+            <h2 className="text-sm font-semibold" style={{ color: '#111' }}>
               {activeSection}
-            </h1>
+            </h2>
           )}
 
           <div className="flex items-center gap-3">

@@ -30,9 +30,9 @@ export const MessagesApp: React.FC = () => {
         </div>
 
         {/* Heading */}
-        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2 tracking-tight">
+        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2 tracking-tight">
           Let's Connect
-        </h1>
+        </h2>
 
         {/* Subtitle */}
         <p className="text-slate-600 text-sm sm:text-base mb-8 leading-relaxed max-w-xl">

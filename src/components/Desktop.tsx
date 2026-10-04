@@ -176,6 +176,7 @@ const HeroHeading: React.FC = () => {
       {/* portfolio. — variable weight wave + spring lift + gradient glow */}
       <div className="overflow-visible py-4">
         <motion.h1
+          aria-label="Satyabrata Pradhan — Software Developer | Full Stack, DevOps & AI"
           className="font-georama flex text-7xl sm:text-8xl md:text-9xl lg:text-[140px] gap-0.5 sm:gap-1 md:gap-1.5 lg:gap-1.5
             italic text-white tracking-wide leading-none -mt-1 sm:-mt-3
             drop-shadow-[0_8px_24px_rgba(0,0,0,0.6)]"
