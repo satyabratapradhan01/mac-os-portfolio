@@ -1,21 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { PLAYLIST } from '../../data/portfolioData';
-import { SongItem } from '../../types';
-import { sound } from '../../utils/sound';
 import {
   Play,
   Pause,
   SkipBack,
   SkipForward,
   Volume2,
-  VolumeX,
-  Shuffle,
-  Repeat,
-  Music as MusicIcon,
-  Heart,
-  ListMusic,
   Disc,
-  Radio
 } from 'lucide-react';
 
 interface MusicAppProps {
@@ -36,7 +27,6 @@ export const MusicApp: React.FC<MusicAppProps> = ({
   onVolumeChange,
 }) => {
   const [progress, setProgress] = useState(0);
-  const [isLiked, setIsLiked] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const song = PLAYLIST[currentSongIndex] || PLAYLIST[0];

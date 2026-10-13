@@ -5,7 +5,6 @@ import {
   Wifi,
   BatteryCharging,
   Sliders,
-  Sparkles,
   Volume2,
   Moon,
   Sun,

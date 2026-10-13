@@ -2,12 +2,12 @@
 class SoundEngine {
   private soundEnabled: boolean = false;
 
-  public setEnabled(_enabled: boolean) {
-    this.soundEnabled = false;
+  public setEnabled(enabled: boolean) {
+    this.soundEnabled = enabled;
   }
 
   public isEnabled(): boolean {
-    return false;
+    return this.soundEnabled;
   }
 
   // All sound effects completely muted & no-op

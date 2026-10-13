@@ -145,15 +145,6 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     }
   }, []);
 
-  const refreshPhotos = useCallback(async () => {
-    const saved = getStorageItem('local', 'portfolio_photos');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) setPhotos(parsed);
-      } catch { }
-    }
-  }, []);
 
   // ── Client-side project mutations ─────────────────────────────────────────────
   const saveProjects = (updatedProjects: ProjectItem[]) => {

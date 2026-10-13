@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { sound } from '../../utils/sound';
-import { Trash2, FileX, RefreshCw, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Trash2, FileX, RefreshCw, CheckCircle2 } from 'lucide-react';
 
 interface TrashFile {
   id: string;
@@ -43,18 +43,15 @@ const INITIAL_TRASH: TrashFile[] = [
 
 export const TrashApp: React.FC = () => {
   const [trashItems, setTrashItems] = useState<TrashFile[]>(INITIAL_TRASH);
-  const [emptied, setEmptied] = useState(false);
 
   const handleEmptyTrash = () => {
     sound.playTrash();
     setTrashItems([]);
-    setEmptied(true);
   };
 
   const handleRestore = () => {
     sound.playClick();
     setTrashItems(INITIAL_TRASH);
-    setEmptied(false);
   };
 
   return (

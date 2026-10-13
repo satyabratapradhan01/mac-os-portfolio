@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
   DEVELOPER_PROFILE,
-  SKILL_CATEGORIES,
   EXPERIENCES,
   EDUCATIONS,
   ACHIEVEMENTS

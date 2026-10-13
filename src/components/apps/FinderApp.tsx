@@ -11,12 +11,9 @@ import {
   Trash2,
   Folder,
   Search,
-  ExternalLink,
-  Code,
   X,
   Github,
   Linkedin,
-  Eye,
 } from 'lucide-react';
 
 interface FinderAppProps {

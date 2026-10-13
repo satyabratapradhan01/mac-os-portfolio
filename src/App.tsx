@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { AppId, WindowState } from './types';
-import { WALLPAPERS, PLAYLIST, DEVELOPER_PROFILE } from './data/portfolioData';
+import { WALLPAPERS } from './data/portfolioData';
 import { sound } from './utils/sound';
 
 // Components
@@ -181,13 +181,13 @@ export default function App() {
   // System States
   const [isAboutMacOpen, setIsAboutMacOpen] = useState(false);
   const [isLocked, setIsLocked] = useState(false);
-  const [selectedWallpaperId, setSelectedWallpaperId] = useState('macos-fluid-wave');
-  const [customWallpaperUrl, setCustomWallpaperUrl] = useState<string | null>(() => {
+  const [selectedWallpaperId] = useState('macos-fluid-wave');
+  const [customWallpaperUrl] = useState<string | null>(() => {
     return localStorage.getItem('macos_custom_wallpaper') || null;
   });
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(true);
-  const [brightness, setBrightness] = useState(1);
+  const [brightness] = useState(1);
   const [volume, setVolume] = useState(0.85);
 
   // Music State
@@ -376,8 +376,6 @@ export default function App() {
         <main id="main-content" className="relative h-full w-full overflow-hidden">
           <Desktop
             onOpenApp={openApp}
-            onOpenAboutMac={() => setIsAboutMacOpen(true)}
-            onOpenTerminal={() => openApp('terminal')}
           />
 
         {/* 5. Window Management Layer */}

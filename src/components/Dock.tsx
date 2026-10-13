@@ -6,16 +6,9 @@ import {
   Folder,
   Compass,
   Terminal,
-  Code2,
   Image,
-  FileText,
   FileBadge,
-  Music,
-  Calculator,
-  Settings,
-  MessageSquare,
   Trash2,
-  Globe
 } from 'lucide-react';
 
 interface DockProps {

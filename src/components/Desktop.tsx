@@ -11,18 +11,11 @@ import {
   FileText,
   Terminal,
   Camera,
-  BookOpen,
   Sparkles,
-  ChevronRight,
-  Sliders,
-  LayoutGrid,
-  Database
 } from 'lucide-react';
 
 interface DesktopProps {
   onOpenApp: (id: AppId) => void;
-  onOpenAboutMac: () => void;
-  onOpenTerminal: () => void;
 }
 
 interface Point {
@@ -227,8 +220,6 @@ const HeroHeading: React.FC = () => {
 
 export const Desktop: React.FC<DesktopProps> = ({
   onOpenApp,
-  onOpenAboutMac,
-  onOpenTerminal,
 }) => {
   const { projects } = usePortfolio();
 
@@ -354,12 +345,6 @@ export const Desktop: React.FC<DesktopProps> = ({
   const [marqueeStart, setMarqueeStart] = useState<Point>({ x: 0, y: 0 });
   const [marqueeCurrent, setMarqueeCurrent] = useState<Point>({ x: 0, y: 0 });
 
-  // Context Menu
-  const [contextMenu, setContextMenu] = useState<{ x: number; y: number; visible: boolean }>({
-    x: 0,
-    y: 0,
-    visible: false,
-  });
 
   const desktopRef = useRef<HTMLDivElement>(null);
 
@@ -387,9 +372,6 @@ export const Desktop: React.FC<DesktopProps> = ({
   // Handle Desktop Mouse Down (Start marquee selection)
   const handleDesktopMouseDown = (e: React.MouseEvent) => {
     if (e.button !== 0) return; // Left click only
-    if (contextMenu.visible) {
-      setContextMenu({ ...contextMenu, visible: false });
-    }
 
     const rect = desktopRef.current?.getBoundingClientRect();
     if (!rect) return;
@@ -417,9 +399,6 @@ export const Desktop: React.FC<DesktopProps> = ({
     });
     setHasMovedDuringDrag(false);
     setSelectedIconIds([iconId]);
-    if (contextMenu.visible) {
-      setContextMenu({ ...contextMenu, visible: false });
-    }
   };
 
   // Global Mouse Move
@@ -500,27 +479,6 @@ export const Desktop: React.FC<DesktopProps> = ({
     }
   };
 
-  const handleContextMenu = (e: React.MouseEvent) => {
-    e.preventDefault();
-    sound.playClick();
-    const x = Math.min(e.clientX, window.innerWidth - 220);
-    const y = Math.min(e.clientY, window.innerHeight - 240);
-    setContextMenu({ x, y, visible: true });
-  };
-
-  // Auto-arrange all icons in a neat left single column
-  const handleAutoAlignIcons = () => {
-    sound.playClick();
-    const resetPositions: Record<string, Point> = {};
-    desktopIcons.forEach((icon, idx) => {
-      resetPositions[icon.id] = {
-        x: PADDING_X,
-        y: PADDING_Y + idx * GRID_SIZE_Y,
-      };
-    });
-    setIconPositions(resetPositions);
-    setContextMenu({ ...contextMenu, visible: false });
-  };
 
   const renderIconGraphic = (type: string, targetApp?: AppId) => {
     if (type === 'folder-code' || type === 'folder') {

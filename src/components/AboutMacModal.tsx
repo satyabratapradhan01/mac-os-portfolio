@@ -1,7 +1,7 @@
 import React from 'react';
 import { DEVELOPER_PROFILE } from '../data/portfolioData';
 import { sound } from '../utils/sound';
-import { Laptop, Cpu, HardDrive, Shield, Sparkles, X } from 'lucide-react';
+import { Laptop, X } from 'lucide-react';
 
 interface AboutMacModalProps {
   isOpen: boolean;

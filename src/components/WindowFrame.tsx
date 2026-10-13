@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion } from 'framer-motion';
 import { WindowState } from '../types';
 import { sound } from '../utils/sound';
-import { Minus, Square, X, Maximize2, Minimize2 } from 'lucide-react';
+import { Minus, X, Maximize2, Minimize2 } from 'lucide-react';
 
 interface WindowFrameProps {
   windowState: WindowState;

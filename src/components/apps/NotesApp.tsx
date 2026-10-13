@@ -4,15 +4,9 @@ import { NoteItem } from '../../types';
 import { sound } from '../../utils/sound';
 import {
   Folder,
-  FileText,
   Search,
   Plus,
-  Trash2,
-  Share2,
   Calendar,
-  Tag,
-  Lock,
-  Sparkles
 } from 'lucide-react';
 
 export const NotesApp: React.FC = () => {
