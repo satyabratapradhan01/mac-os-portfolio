@@ -64,7 +64,7 @@ const removeStorageItem = (storage: 'local' | 'session', key: string): void => {
   try {
     const target = storage === 'local' ? window.localStorage : window.sessionStorage;
     target.removeItem(key);
-  } catch {}
+  } catch { }
 };
 
 export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -77,9 +77,22 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         if (Array.isArray(parsed) && parsed.length > 0) {
           const removedIds = new Set(['snapcast-streaming', 'converso-chat', 'prepwise-ai']);
           const filtered = parsed.filter((p: any) => p && !removedIds.has(p.id));
-          if (filtered.length > 0) return filtered;
+          if (filtered.length > 0) {
+            return filtered.map((p: any) => {
+              const staticMatch = STATIC_PROJECTS.find((sp) => sp.id === p.id);
+              if (staticMatch) {
+                return {
+                  ...p,
+                  title: staticMatch.title,
+                  liveUrl: staticMatch.liveUrl,
+                  githubUrl: staticMatch.githubUrl,
+                };
+              }
+              return p;
+            });
+          }
         }
-      } catch {}
+      } catch { }
     }
     return STATIC_PROJECTS;
   });
@@ -95,7 +108,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       try {
         const parsed: PhotoItem[] = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-      } catch {}
+      } catch { }
     }
     return STATIC_PHOTOS;
   });
@@ -110,7 +123,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     if (saved) {
       try {
         return JSON.parse(saved);
-      } catch {}
+      } catch { }
     }
     return null;
   });
@@ -128,7 +141,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       try {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed)) setProjects(parsed);
-      } catch {}
+      } catch { }
     }
   }, []);
 
@@ -138,7 +151,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       try {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed)) setPhotos(parsed);
-      } catch {}
+      } catch { }
     }
   }, []);
 

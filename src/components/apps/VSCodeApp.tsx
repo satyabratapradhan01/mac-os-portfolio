@@ -273,13 +273,11 @@ export const VSCodeApp: React.FC = () => {
                         sound.playClick();
                         setSelectedFile(fileName);
                       }}
-                      className={`w-full flex items-center gap-2 px-2 py-1 rounded text-left transition-colors ${
-                        isSelected ? 'bg-[#37373d] text-white font-medium' : 'text-slate-400 hover:bg-[#2a2d2e] hover:text-slate-200'
-                      }`}
+                      className={`w-full flex items-center gap-2 px-2 py-1 rounded text-left transition-colors ${isSelected ? 'bg-[#37373d] text-white font-medium' : 'text-slate-400 hover:bg-[#2a2d2e] hover:text-slate-200'
+                        }`}
                     >
-                      <FileCode className={`w-3.5 h-3.5 ${
-                        fileName.endsWith('.ts') ? 'text-blue-400' : fileName.endsWith('.cpp') ? 'text-amber-500' : 'text-rose-400'
-                      }`} />
+                      <FileCode className={`w-3.5 h-3.5 ${fileName.endsWith('.ts') ? 'text-blue-400' : fileName.endsWith('.cpp') ? 'text-amber-500' : 'text-rose-400'
+                        }`} />
                       <span className="truncate">{fileName}</span>
                     </button>
                   );
@@ -299,9 +297,8 @@ export const VSCodeApp: React.FC = () => {
                 <div
                   key={fileName}
                   onClick={() => setSelectedFile(fileName)}
-                  className={`flex items-center gap-2 px-3 py-1.5 border-r border-[#191919] cursor-pointer text-xs ${
-                    isSelected ? 'bg-[#1e1e1e] text-white border-t-2 border-t-blue-500' : 'text-slate-400 hover:bg-[#2a2d2e]'
-                  }`}
+                  className={`flex items-center gap-2 px-3 py-1.5 border-r border-[#191919] cursor-pointer text-xs ${isSelected ? 'bg-[#1e1e1e] text-white border-t-2 border-t-blue-500' : 'text-slate-400 hover:bg-[#2a2d2e]'
+                    }`}
                 >
                   <span>{fileName}</span>
                 </div>

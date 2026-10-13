@@ -99,7 +99,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
 export const PROJECTS: ProjectItem[] = [
   {
     id: 'devpilot-ai',
-    title: 'DevPilot – AI-Powered Web App Builder',
+    title: 'DevPilot — AI Website Builder',
     tagline: 'In-browser AI app builder converting natural language into live Node.js/React apps',
     category: 'AI & WebGL',
     role: 'Creator & Lead Architect',
@@ -134,8 +134,8 @@ Key Engineering Highlights:
       'JWT',
       'Tailwind CSS',
     ],
-    githubUrl: 'https://github.com/satyabratapradhan01/devpilot',
-    liveUrl: 'https://devpilot.satyabrata.dev',
+    githubUrl: 'https://github.com/satyabratapradhan01/DevPilot',
+    liveUrl: 'https://devpilot.satyabratapradhan.dev/',
     screenshots: [
       {
         title: 'WebContainers In-Browser Live Preview & Editor',
@@ -166,53 +166,53 @@ export async function mountAndBootApp(fileTree: Record<string, any>) {
   },
   {
     id: 'job-tracker-ai',
-    title: 'AI-Powered Job Application Tracker',
+    title: 'HireFlow AI - AI-Powered Recruitment & Application Tracker',
     tagline: 'Job search management platform with Claude API intelligent resume matching',
     category: 'Full Stack & AI',
     role: 'Full-Stack & AI Developer',
-    year: '2026',
+    year: 'Nov 2025 – Feb 2026',
     featured: true,
     accentColor: '#8b5cf6',
     iconName: 'Briefcase',
-    description: 'A full-stack job application tracking platform that helps users organize, monitor, and manage their job search pipeline end-to-end with Claude AI integration.',
+    description: 'A full-stack recruitment platform to streamline job applications, recruiter workflows, and interview scheduling with AI features.',
     longDescription: `Full-stack platform empowering job seekers to track application status, manage interviews, and receive AI-guided resume matching.
 
 Key Engineering Highlights:
-• Built a full-stack job application tracking platform that helps users organize, monitor, and manage their job search pipeline end-to-end.
-• Designed MongoDB schemas to model applications, companies, and status stages, and architected a RESTful API layer using Node.js and Express.js for CRUD operations across applications, notes, and status tracking.
-• Implemented secure JWT-based authentication and authorization to manage user sessions and protect personal application data.
-• Integrated the Claude API to power AI-assisted features such as application insights, follow-up suggestions, and resume/job-description matching.
-• Developed a responsive React.js frontend with a structured component hierarchy for dashboards, application lists, and detail views, deployed on Vercel, Render, and MongoDB Atlas.`,
+• Developed a full-stack recruitment platform to streamline job applications, recruiter workflows, and interview scheduling.
+• Built role-based dashboards for recruiters and job seekers to manage job postings, candidate profiles, and applications.
+• Designed and implemented RESTful APIs using Node.js and Express.js for authentication, job management, and application workflows.
+• Integrated MongoDB for managing user accounts, job listings, candidate profiles, and application records.
+• Integrated Cloudflare R2 for resume file storage and SMTP for automated interview notifications and application updates.
+• Designed AI-driven recruitment features, including resume analysis, ATS scoring, smart job matching, and AI-powered interview preparation.`,
     metrics: [
-      'Claude API AI Matching',
-      'End-to-End Search Pipeline',
-      'JWT Auth & Session Management',
-      'Deployed on Vercel & Render',
+      'ATS Resume Scoring & AI Matching',
+      'Role-based Recruiter/Applicant Dashboards',
+      'Cloudflare R2 & SMTP Automation',
+      'Full End-to-End Recruitment Lifecycle',
     ],
     techStack: [
       'React.js',
       'Node.js',
       'Express.js',
       'MongoDB',
+      'Cloudflare R2',
+      'SMTP',
       'JWT',
-      'Claude API',
       'Tailwind CSS',
-      'Vercel',
-      'Render',
     ],
-    githubUrl: 'https://github.com/satyabratapradhan01/job-tracker-ai',
-    liveUrl: 'https://job-tracker-ai.satyabrata.dev',
+    githubUrl: 'https://github.com/satyabratapradhan01/AI-powered-recruitment-platform',
+    liveUrl: 'https://hireflowai.satyabratapradhan.dev/',
     screenshots: [
       {
-        title: 'Job Search Pipeline Dashboard',
-        caption: 'Kanban & list tracking of applications with Claude AI resume matching.',
+        title: 'Recruitment & Job Search Pipeline Dashboard',
+        caption: 'Kanban & list tracking of applications with AI resume matching and interview scheduler.',
         gradient: 'from-purple-600 to-indigo-900',
       },
     ],
   },
   {
     id: 'clothify-ecommerce',
-    title: 'Clothify – Full-Stack E-Commerce',
+    title: 'Clothify - Nayak Treder',
     tagline: 'Modern clothing e-commerce platform with Stripe & role-based dashboards',
     category: 'Full Stack',
     role: 'Full-Stack Developer',
@@ -246,8 +246,8 @@ Key Engineering Highlights:
       'Redux Toolkit',
       'Tailwind CSS',
     ],
-    githubUrl: 'https://github.com/satyabratapradhan01/clothify',
-    liveUrl: 'https://clothify-store.satyabrata.dev',
+    githubUrl: 'https://github.com/satyabratapradhan01/Clothify-Full-Stack-E-Commerce-Platform',
+    liveUrl: 'https://clothify.satyabratapradhan.dev/',
     screenshots: [
       {
         title: 'Product Catalog & Size/Quantity Selector',
@@ -280,7 +280,7 @@ router.post('/create-checkout-session', authenticateUser, async (req, res) => {
   },
   {
     id: 'wanderlust-travel',
-    title: 'Wanderlust – Hotel & Accommodation Booking',
+    title: 'WanderLust',
     tagline: 'Hotel accommodation discovery platform with user reviews & CRUD operations',
     category: 'Full Stack',
     role: 'Full-Stack Developer',
@@ -311,8 +311,8 @@ Key Engineering Highlights:
       'REST APIs',
       'Passport.js',
     ],
-    githubUrl: 'https://github.com/satyabratapradhan01/wanderlust',
-    liveUrl: 'https://wanderlust.satyabrata.dev',
+    githubUrl: 'https://github.com/satyabratapradhan01/Wanderlust',
+    liveUrl: 'https://wanderlust.satyabratapradhan.dev/listings',
     screenshots: [
       {
         title: 'Accommodation Listings & Rating Explorer',

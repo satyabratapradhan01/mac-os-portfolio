@@ -5,7 +5,6 @@ import { sound } from './utils/sound';
 
 // Components
 import { Menubar } from './components/Menubar';
-import { ControlCenter } from './components/ControlCenter';
 import { Dock } from './components/Dock';
 import { Desktop } from './components/Desktop';
 import { WindowFrame } from './components/WindowFrame';
@@ -180,7 +179,6 @@ export default function App() {
   const [topZIndex, setTopZIndex] = useState(20);
 
   // System States
-  const [isControlCenterOpen, setIsControlCenterOpen] = useState(false);
   const [isAboutMacOpen, setIsAboutMacOpen] = useState(false);
   const [isLocked, setIsLocked] = useState(false);
   const [selectedWallpaperId, setSelectedWallpaperId] = useState('macos-fluid-wave');
@@ -332,7 +330,6 @@ export default function App() {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Esc -> close overlays
       if (e.key === 'Escape') {
-        setIsControlCenterOpen(false);
         setIsAboutMacOpen(false);
       }
     };
@@ -364,8 +361,6 @@ export default function App() {
         <Menubar
           activeAppId={activeAppId}
           onOpenApp={openApp}
-          onToggleControlCenter={() => setIsControlCenterOpen(!isControlCenterOpen)}
-          isControlCenterOpen={isControlCenterOpen}
           onLockScreen={() => setIsLocked(true)}
           onOpenAboutMac={() => setIsAboutMacOpen(true)}
           soundEnabled={soundEnabled}
@@ -375,23 +370,6 @@ export default function App() {
           }}
           isDarkMode={isDarkMode}
           onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
-        />
-
-        {/* 2. Control Center Dropdown */}
-        <ControlCenter
-          isOpen={isControlCenterOpen}
-          onClose={() => setIsControlCenterOpen(false)}
-          brightness={brightness}
-          onBrightnessChange={setBrightness}
-          volume={volume}
-          onVolumeChange={setVolume}
-          isDarkMode={isDarkMode}
-          onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
-          isPlayingMusic={isPlayingMusic}
-          onTogglePlayMusic={() => setIsPlayingMusic(!isPlayingMusic)}
-          currentSongIndex={currentSongIndex}
-          onNextSong={() => setCurrentSongIndex((idx) => (idx + 1) % PLAYLIST.length)}
-          onOpenApp={openApp}
         />
 
         {/* 4. Desktop Canvas & Icons */}

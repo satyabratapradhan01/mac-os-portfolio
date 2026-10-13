@@ -4,7 +4,8 @@ import {
   Mail,
   Phone,
   Linkedin,
-  Github
+  Github,
+  Globe
 } from 'lucide-react';
 
 export const ResumeApp: React.FC = () => {
@@ -48,7 +49,7 @@ export const ResumeApp: React.FC = () => {
               </a>
               <span className="text-slate-400">•</span>
               <a
-                href={DEVELOPER_PROFILE.linkedin}
+                href="https://linkedin.com/in/satyabratapradhan"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-1 hover:text-blue-600 transition-colors"
@@ -58,13 +59,23 @@ export const ResumeApp: React.FC = () => {
               </a>
               <span className="text-slate-400">•</span>
               <a
-                href={DEVELOPER_PROFILE.github}
+                href="https://github.com/satyabratapradhan01"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-1 hover:text-blue-600 transition-colors"
               >
                 <Github className="w-3 h-3 text-[#1a2e5a]" />
                 <span>satyabratapradhan01</span>
+              </a>
+              <span className="text-slate-400">•</span>
+              <a
+                href="https://satyabratapradhan.dev"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-1 hover:text-blue-600 transition-colors"
+              >
+                <Globe className="w-3 h-3 text-[#1a2e5a]" />
+                <span>satyabratapradhan.dev</span>
               </a>
             </div>
           </div>
@@ -77,15 +88,12 @@ export const ResumeApp: React.FC = () => {
             <div className="space-y-2">
               <div>
                 <div className="flex justify-between items-baseline">
-                  <span className="font-bold text-slate-900">Bachelor of Technology in Computer Science</span>
+                  <span className="font-bold text-slate-900">B.Tech. in Computer Science & Engineering</span>
                   <span className="text-[10px] text-slate-600 font-medium">Aug 2022 – May 2026</span>
                 </div>
-                <div className="italic text-slate-700 text-[10.5px]">Centurion University</div>
-                <ul className="list-disc list-inside space-y-0.5 text-slate-800 ml-1 mt-0.5">
+                <div className="text-slate-700 text-[10.5px]">Centurion University of Technology & Management</div>
+                <ul className="list-disc list-outside ml-4 space-y-0.5 text-slate-800 text-[10.5px] mt-0.5">
                   <li>CGPA: 8.1/10</li>
-                  <li>
-                    <span className="font-medium">Relevant Coursework:</span> Data Structures & Algorithms, DBMS, Operating Systems, Computer Networks, Web Development
-                  </li>
                 </ul>
               </div>
 
@@ -94,8 +102,8 @@ export const ResumeApp: React.FC = () => {
                   <span className="font-bold text-slate-900">Class 12th</span>
                   <span className="text-[10px] text-slate-600 font-medium">Aug 2019 – Sep 2021</span>
                 </div>
-                <div className="italic text-slate-700 text-[10.5px]">Academia International H S School Of Science</div>
-                <ul className="list-disc list-inside space-y-0.5 text-slate-800 ml-1 mt-0.5">
+                <div className="text-slate-700 text-[10.5px]">Academia International H S School Of Science</div>
+                <ul className="list-disc list-outside ml-4 space-y-0.5 text-slate-800 text-[10.5px] mt-0.5">
                   <li>Percentage: 62%</li>
                 </ul>
               </div>
@@ -108,8 +116,30 @@ export const ResumeApp: React.FC = () => {
               ACHIEVEMENTS
             </h2>
             <ul className="list-disc list-inside space-y-0.5 text-slate-800 ml-1">
-              <li>Solved 150+ DSA problems on LeetCode.</li>
-              <li>Solved 300+ coding problems on TakeUForward (TUF).</li>
+              <li>
+                Solved 150+ DSA problems on{' '}
+                <a
+                  href="https://leetcode.com/u/satyabratapradhan/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-blue-600 hover:underline"
+                >
+                  LeetCode
+                </a>
+                .
+              </li>
+              <li>
+                Solved 300+ coding problems on{' '}
+                <a
+                  href="https://takeuforward.org/profile/satyabratapradhan"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-blue-600 hover:underline"
+                >
+                  TakeUForward (TUF)
+                </a>
+                .
+              </li>
             </ul>
           </div>
 
@@ -122,8 +152,27 @@ export const ResumeApp: React.FC = () => {
               {/* DevPilot */}
               <div>
                 <div className="flex justify-between items-baseline">
-                  <span className="font-bold text-slate-900 text-[11.5px]">DevPilot – AI-Powered Web App Builder</span>
-                  <span className="text-[10px] text-slate-600 font-medium">May 2026 – Jul 2026</span>
+                  <span className="font-bold text-slate-900 text-[11.5px]">DevPilot — AI Website Builder</span>
+                  <div className="text-[10px] text-slate-600 font-medium">
+                    <a
+                      href="https://devpilot.satyabratapradhan.dev/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-600 hover:underline font-semibold"
+                    >
+                      Live
+                    </a>{' '}
+                    |{' '}
+                    <a
+                      href="https://github.com/satyabratapradhan01/DevPilot"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-600 hover:underline font-semibold"
+                    >
+                      GitHub
+                    </a>{' '}
+                    | May 2026 – Jul 2026
+                  </div>
                 </div>
                 <div className="italic text-slate-600 text-[10px] mb-1">
                   React.js, Node.js, TypeScript, MongoDB, WebContainers, Google Gemini AI
@@ -138,28 +187,68 @@ export const ResumeApp: React.FC = () => {
                 </ul>
               </div>
 
-              {/* Job Application Tracker */}
+              {/* HireFlow AI */}
               <div>
                 <div className="flex justify-between items-baseline">
-                  <span className="font-bold text-slate-900 text-[11.5px]">Job Application Tracker</span>
-                  <span className="text-[10px] text-slate-600 font-medium">Nov 2025 – Feb 2026</span>
+                  <span className="font-bold text-slate-900 text-[11.5px]">HireFlow AI - AI-Powered Recruitment & Application Tracker</span>
+                  <div className="text-[10px] text-slate-600 font-medium">
+                    <a
+                      href="https://hireflowai.satyabratapradhan.dev/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-600 hover:underline font-semibold"
+                    >
+                      Live
+                    </a>{' '}
+                    |{' '}
+                    <a
+                      href="https://github.com/satyabratapradhan01/AI-powered-recruitment-platform"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-600 hover:underline font-semibold"
+                    >
+                      GitHub
+                    </a>{' '}
+                    | Nov 2025 – Feb 2026
+                  </div>
                 </div>
                 <div className="italic text-slate-600 text-[10px] mb-1">
-                  React.js, Node.js, Express.js, MongoDB, JWT
+                  React.js, Node.js, Express.js, MongoDB, Cloudflare R2, SMTP
                 </div>
                 <ul className="list-disc list-outside ml-4 space-y-0.5 text-slate-800 text-[10.5px] leading-snug">
-                  <li>Built a full-stack job application tracking platform that helps users organize, monitor, and manage their job search pipeline end-to-end.</li>
-                  <li>Designed MongoDB schemas to model applications, companies, and status stages, and architected a RESTful API layer using Node.js and Express.js for CRUD operations across applications, notes, and status tracking.</li>
-                  <li>Implemented secure JWT-based authentication and authorization to manage user sessions and protect personal application data.</li>
-                  <li>Developed a responsive React.js frontend with a structured component hierarchy for dashboards, application lists, and detail views, deployed on a free-tier stack — Vercel, Render, and MongoDB Atlas.</li>
+                  <li>Developed a full-stack recruitment platform to streamline job applications, recruiter workflows, and interview scheduling.</li>
+                  <li>Built role-based dashboards for recruiters and job seekers to manage job postings, candidate profiles, and applications.</li>
+                  <li>Designed and implemented RESTful APIs using Node.js and Express.js for authentication, job management, and application workflows.</li>
+                  <li>Integrated MongoDB for managing user accounts, job listings, candidate profiles, and application records.</li>
+                  <li>Integrated Cloudflare R2 for resume file storage and SMTP for automated interview notifications and application updates.</li>
+                  <li>Designed AI-driven recruitment features, including resume analysis, ATS scoring, smart job matching, and AI-powered interview preparation.</li>
                 </ul>
               </div>
 
               {/* Clothify */}
               <div>
                 <div className="flex justify-between items-baseline">
-                  <span className="font-bold text-slate-900 text-[11.5px]">Clothify</span>
-                  <span className="text-[10px] text-slate-600 font-medium">Jul 2025 – Aug 2025</span>
+                  <span className="font-bold text-slate-900 text-[11.5px]">Clothify - Nayak Treder</span>
+                  <div className="text-[10px] text-slate-600 font-medium">
+                    <a
+                      href="https://clothify.satyabratapradhan.dev/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-600 hover:underline font-semibold"
+                    >
+                      Live
+                    </a>{' '}
+                    |{' '}
+                    <a
+                      href="https://github.com/satyabratapradhan01/Clothify-Full-Stack-E-Commerce-Platform"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-600 hover:underline font-semibold"
+                    >
+                      GitHub
+                    </a>{' '}
+                    | Jul 2025 – Aug 2025
+                  </div>
                 </div>
                 <div className="italic text-slate-600 text-[10px] mb-1">
                   React.js, Node.js, Express.js, MongoDB, Stripe, Cloudinary
@@ -176,8 +265,27 @@ export const ResumeApp: React.FC = () => {
               {/* Wanderlust */}
               <div>
                 <div className="flex justify-between items-baseline">
-                  <span className="font-bold text-slate-900 text-[11.5px]">Wanderlust</span>
-                  <span className="text-[10px] text-slate-600 font-medium">Jan 2025 – Feb 2025</span>
+                  <span className="font-bold text-slate-900 text-[11.5px]">WanderLust</span>
+                  <div className="text-[10px] text-slate-600 font-medium">
+                    <a
+                      href="https://wanderlust.satyabratapradhan.dev/listings"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-600 hover:underline font-semibold"
+                    >
+                      Live
+                    </a>{' '}
+                    |{' '}
+                    <a
+                      href="https://github.com/satyabratapradhan01/Wanderlust"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-600 hover:underline font-semibold"
+                    >
+                      GitHub
+                    </a>{' '}
+                    | Jan 2025 – Feb 2025
+                  </div>
                 </div>
                 <div className="italic text-slate-600 text-[10px] mb-1">
                   Node.js, Express.js, MongoDB, EJS

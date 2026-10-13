@@ -118,12 +118,12 @@ const formatProjectTxtProse = (project: ProjectItem): string[] => {
       "It's built with React.js, Node.js, and TypeScript, utilizing Google Gemini 2.5 Flash as the primary LLM with Groq LLaMA 3.3 70B automatic fallback routing."
     ];
   }
-  if (project.id === 'job-tracker-ai') {
+  if (project.id === 'job-tracker-ai' || project.id === 'hireflow-ai') {
     return [
-      "Our AI-Powered Job Application Tracker is a modern management platform that helps job seekers organize, monitor, and optimize their job search pipeline end-to-end.",
-      "Instead of tracking applications in scattered spreadsheets or missing follow-up dates, users can manage interview stages, organize applications, and get AI-guided resume feedback in real time.",
-      "Think of it like having a personal career co-pilot—keeping your search organized and matching your resume directly against target job descriptions.",
-      "It's built with React.js, Node.js, Express.js, and MongoDB, integrating the Claude API for intelligent resume matching and application insights."
+      "HireFlow AI is a modern full-stack recruitment platform that streamlines job applications, recruiter workflows, and interview scheduling end-to-end.",
+      "Instead of tracking applications in scattered spreadsheets or missing interview stages, recruiters and candidates manage applications with AI-driven ATS scoring and smart matching.",
+      "Think of it like having an intelligent recruitment co-pilot—keeping every application organized and matching candidate qualifications in real time.",
+      "It's built with React.js, Node.js, Express.js, and MongoDB, integrating Cloudflare R2 for resume file storage and SMTP for automated interview workflows."
     ];
   }
   if (project.id === 'clothify-ecommerce') {
@@ -134,9 +134,9 @@ const formatProjectTxtProse = (project: ProjectItem): string[] => {
       "It's built with React.js, Node.js, Express.js, and MongoDB, featuring Stripe payment gateway integration and Cloudinary cloud media storage."
     ];
   }
-  if (project.id === 'wanderlust-hotel') {
+  if (project.id === 'wanderlust-hotel' || project.id === 'wanderlust-travel') {
     return [
-      "Our Wanderlust Booking App is an intuitive hotel and vacation rental platform designed for effortless travel planning.",
+      "Our WanderLust Booking App is an intuitive hotel and vacation rental platform designed for effortless travel planning.",
       "Instead of tedious booking processes, users can explore curated accommodation listings, view interactive map locations, and reserve stays with instant confirmation.",
       "Think of it like having a global travel concierge—ready to find and book top-rated stays worldwide.",
       "It's built with Node.js, Express.js, MongoDB, and EJS, using Mapbox API for location mapping and Passport.js for secure user sessions."
@@ -312,24 +312,26 @@ export const FinderApp: React.FC<FinderAppProps> = ({ onOpenApp }) => {
 
   // Generate Files inside the selected Project Folder
   const getProjectFiles = (project: ProjectItem): FileItem[] => {
-    // Derive domain name for web link
-    const domainName = project.liveUrl
-      ? project.liveUrl.replace(/^https?:\/\//, '').replace(/\/.*$/, '')
-      : `${project.id.toLowerCase().replace(/[^a-z0-9]/g, '')}.com`;
+    // Clean display label for web link
+    const cleanUrlLabel = project.liveUrl
+      ? project.liveUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')
+      : `${project.id.toLowerCase().replace(/[^a-z0-9]/g, '')}.dev`;
+
+    const txtFileName = `${project.title.split(/[\s–—-]+/)[0]} Project.txt`;
 
     return [
       {
         id: `${project.id}-txt`,
-        name: `${project.title.split(' ')[0]} Project.txt`,
+        name: txtFileName,
         type: 'txt',
-        label: `${project.title.split(' ')[0]} Project.txt`,
+        label: txtFileName,
         project: project,
       },
       {
         id: `${project.id}-url`,
-        name: domainName,
+        name: cleanUrlLabel,
         type: 'url',
-        label: domainName,
+        label: cleanUrlLabel,
         url: project.liveUrl,
         project: project,
       },

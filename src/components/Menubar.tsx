@@ -3,7 +3,6 @@ import { AppId } from '../types';
 import { sound } from '../utils/sound';
 import {
   Wifi,
-  Battery,
   BatteryCharging,
   Sliders,
   Sparkles,
@@ -19,8 +18,6 @@ import {
 interface MenubarProps {
   activeAppId: AppId | null;
   onOpenApp: (id: AppId) => void;
-  onToggleControlCenter: () => void;
-  isControlCenterOpen: boolean;
   onLockScreen: () => void;
   onOpenAboutMac: () => void;
   soundEnabled: boolean;
@@ -47,8 +44,6 @@ const APP_NAMES: Record<AppId, string> = {
 export const Menubar: React.FC<MenubarProps> = ({
   activeAppId,
   onOpenApp,
-  onToggleControlCenter,
-  isControlCenterOpen,
   onLockScreen,
   onOpenAboutMac,
   soundEnabled,
@@ -59,7 +54,6 @@ export const Menubar: React.FC<MenubarProps> = ({
   const [timeString, setTimeString] = useState('');
   const [dateString, setDateString] = useState('');
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [showBatteryFlyout, setShowBatteryFlyout] = useState(false);
 
   const menubarRef = useRef<HTMLDivElement>(null);
 
@@ -90,7 +84,6 @@ export const Menubar: React.FC<MenubarProps> = ({
     const handleClickOutside = (e: MouseEvent) => {
       if (menubarRef.current && !menubarRef.current.contains(e.target as Node)) {
         setActiveMenu(null);
-        setShowBatteryFlyout(false);
       }
     };
     window.addEventListener('mousedown', handleClickOutside);
@@ -103,7 +96,6 @@ export const Menubar: React.FC<MenubarProps> = ({
       setActiveMenu(null);
     } else {
       setActiveMenu(menuName);
-      setShowBatteryFlyout(false);
     }
   };
 
@@ -127,8 +119,8 @@ export const Menubar: React.FC<MenubarProps> = ({
             }`}
           >
             {/* Apple Icon */}
-            <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 170 170">
-              <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.6-7.7-11.71-13.98-5.77-8.81-10.39-18.79-13.86-29.93-3.48-11.14-5.22-21.72-5.22-31.75 0-14.77 3.86-26.69 11.58-35.77 7.72-9.08 17.1-13.68 28.14-13.8 4.67 0 9.8 1.15 15.39 3.44 5.58 2.29 9.38 3.5 11.39 3.64 1.79-.14 5.76-1.39 11.91-3.76 6.16-2.37 11.34-3.43 15.54-3.18 13.9.72 24.62 5.86 32.17 15.42-12.19 7.37-18.17 17.51-17.93 30.41.24 10.37 4.14 18.99 11.71 25.86 7.57 6.87 16.59 10.66 27.06 11.37-2.61 7.72-5.69 15.11-9.24 22.18zM119.22 31.84c0-7.72 2.76-14.86 8.28-21.43 5.52-6.57 12.33-10.41 20.43-11.52.12 1.01.18 1.95.18 2.82 0 7.72-2.88 15.04-8.64 21.96-5.76 6.92-12.82 10.69-21.18 11.31-.24-1.01-.36-2.06-.36-3.14z" />
+            <svg className="w-3.5 h-[17px] fill-current" viewBox="0 0 14 17" fill="currentColor">
+              <path d="M9.5085 4.74883C9.61992 4.74883 9.79237 4.76209 10.0258 4.78862C10.2646 4.80985 10.5352 4.86821 10.8376 4.96372C11.1401 5.05923 11.4478 5.2131 11.7609 5.42534C12.0739 5.63758 12.3631 5.93472 12.6284 6.31675C12.6019 6.33267 12.5011 6.4043 12.326 6.53164C12.1562 6.65898 11.9625 6.84469 11.745 7.08877C11.5274 7.32754 11.3364 7.63263 11.1719 8.00405C11.0127 8.37017 10.9332 8.80791 10.9332 9.31729C10.9332 9.90094 11.034 10.3944 11.2356 10.7977C11.4425 11.2009 11.6813 11.5272 11.9519 11.7766C12.2278 12.026 12.4719 12.209 12.6841 12.3258C12.9017 12.4372 13.0184 12.4956 13.0343 12.5009C13.029 12.5221 12.9892 12.6415 12.9149 12.859C12.8407 13.0713 12.7239 13.3472 12.5647 13.6868C12.4109 14.021 12.2092 14.3712 11.9599 14.7374C11.7317 15.061 11.4956 15.3714 11.2515 15.6686C11.0127 15.9657 10.7501 16.2071 10.4636 16.3928C10.1824 16.5838 9.864 16.6793 9.5085 16.6793C9.23789 16.6793 9.00708 16.6475 8.81606 16.5838C8.62505 16.5202 8.44199 16.4459 8.26689 16.361C8.0971 16.2814 7.90874 16.2098 7.70181 16.1461C7.49487 16.0824 7.23753 16.0506 6.92979 16.0506C6.52653 16.0506 6.1896 16.101 5.91899 16.2018C5.65369 16.3079 5.40166 16.414 5.16289 16.5202C4.92412 16.6263 4.6429 16.6793 4.31924 16.6793C3.82578 16.6793 3.39069 16.4857 3.01397 16.0983C2.64255 15.711 2.26051 15.2441 1.86787 14.6976C1.56543 14.2625 1.28952 13.7611 1.04014 13.1933C0.790756 12.6256 0.591781 12.0233 0.443213 11.3866C0.294646 10.7499 0.220362 10.1132 0.220362 9.47647C0.220362 8.45772 0.41403 7.59814 0.801368 6.89775C1.1887 6.19206 1.68481 5.65881 2.2897 5.298C2.89458 4.93189 3.52334 4.74883 4.17598 4.74883C4.52087 4.74883 4.84453 4.80985 5.14697 4.93189C5.45472 5.05392 5.74124 5.17596 6.00654 5.298C6.27184 5.41473 6.51327 5.4731 6.73081 5.4731C6.93774 5.4731 7.18182 5.41473 7.46304 5.298C7.74425 5.17596 8.05466 5.05392 8.39424 4.93189C8.73913 4.80985 9.11055 4.74883 9.5085 4.74883ZM8.95137 3.45947C8.68607 3.78314 8.35179 4.05109 7.94854 4.26333C7.55059 4.47557 7.17386 4.58169 6.81836 4.58169C6.74408 4.58169 6.67244 4.57373 6.60347 4.55781C6.59816 4.53659 6.5902 4.49945 6.57959 4.44639C6.57428 4.39333 6.57163 4.33496 6.57163 4.27129C6.57163 3.86803 6.65918 3.47539 6.83428 3.09336C7.00938 2.71133 7.211 2.39297 7.43916 2.13828C7.72038 1.804 8.07588 1.52544 8.50566 1.30259C8.94076 1.07974 9.35728 0.960352 9.75522 0.944434C9.77114 1.03464 9.7791 1.1381 9.7791 1.25483C9.7791 1.6634 9.70216 2.06135 9.54829 2.44868C9.39442 2.83071 9.19544 3.16764 8.95137 3.45947Z" />
             </svg>
           </button>
 
@@ -342,45 +334,17 @@ export const Menubar: React.FC<MenubarProps> = ({
           <Volume2 className="w-3.5 h-3.5" />
         </button>
 
-        {/* Battery with Flyout */}
-        <div className="relative">
-          <button
-            id="battery-btn"
-            onClick={() => {
-              sound.playClick();
-              setShowBatteryFlyout(!showBatteryFlyout);
-              setActiveMenu(null);
-            }}
-            className="flex items-center gap-1 px-1 py-0.5 rounded hover:bg-white/20 transition-colors"
-            title="Battery: 100% (Power Adapter Connected)"
-          >
-            <span className="text-[11px] font-mono hidden md:inline">100%</span>
-            <BatteryCharging className="w-4 h-4 text-emerald-400" />
-          </button>
-
-          {showBatteryFlyout && (
-            <div className="absolute top-7 right-0 w-60 bg-slate-900/95 backdrop-blur-2xl border border-white/15 rounded-lg shadow-2xl p-3 z-50 text-white animate-in fade-in zoom-in-95 duration-100">
-              <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-2">
-                <span className="font-semibold text-xs">Battery Status</span>
-                <span className="text-emerald-400 text-[11px] font-mono">100% Charged</span>
-              </div>
-              <div className="text-[11px] text-slate-300 space-y-1">
-                <div className="flex justify-between">
-                  <span>Power Source:</span>
-                  <span className="font-medium text-white">Power Adapter (96W USB-C)</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Condition:</span>
-                  <span className="text-emerald-400">Normal (100% Health)</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Apps Using Energy:</span>
-                  <span className="text-slate-400">VS Code, Terminal</span>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
+        {/* Battery Icon Only */}
+        <button
+          id="battery-btn"
+          onClick={() => {
+            sound.playClick();
+          }}
+          className="p-1 rounded hover:bg-white/20 transition-colors"
+          title="Battery: 100% (Power Adapter Connected)"
+        >
+          <BatteryCharging className="w-4 h-4 text-emerald-400" />
+        </button>
 
         {/* Wi-Fi Icon */}
         <div className="relative">
@@ -388,7 +352,6 @@ export const Menubar: React.FC<MenubarProps> = ({
             id="wifi-btn"
             onClick={() => {
               sound.playClick();
-              setShowBatteryFlyout(false);
               setActiveMenu(null);
             }}
             className="p-1 rounded hover:bg-white/20 transition-colors"
@@ -398,16 +361,13 @@ export const Menubar: React.FC<MenubarProps> = ({
           </button>
         </div>
 
-        {/* Control Center Toggle */}
+        {/* Control Center Icon Only */}
         <button
           id="control-center-btn"
           onClick={() => {
             sound.playClick();
-            onToggleControlCenter();
           }}
-          className={`p-1 rounded hover:bg-white/20 transition-colors ${
-            isControlCenterOpen ? 'bg-white/25 text-white' : ''
-          }`}
+          className="p-1 rounded hover:bg-white/20 transition-colors"
           title="Control Center"
         >
           <Sliders className="w-3.5 h-3.5" />
@@ -419,7 +379,6 @@ export const Menubar: React.FC<MenubarProps> = ({
             id="clock-btn"
             onClick={() => {
               sound.playClick();
-              setShowBatteryFlyout(false);
               setActiveMenu(null);
             }}
             className="flex items-center gap-1.5 px-2 py-0.5 rounded hover:bg-white/20 transition-colors font-medium"

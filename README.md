@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 # macOS Developer Portfolio
 
 An interactive, high-performance **macOS-inspired developer portfolio** built with **React 19**, **TypeScript**, **Tailwind CSS v4**, and **Vite**.
